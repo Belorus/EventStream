@@ -1,0 +1,39 @@
+// Data types: #string, #long, #int, #float, #double, #bool
+
+{
+  "fields": {
+    "facility": "#string",
+    "user_id": "#string",
+    "platform_type": "#string",
+    "session_id": "#string",
+    "user_sn_id": "#string",
+    "login_mode": "#string",
+    "client_timestamp": "#long",
+    "app_version": "#string",
+    "os_name": "#string",
+    "os_version": "#string"
+  },
+  "groups": [
+    {
+      "percent": 2,
+      "fields": {
+        "event_group": "CLIENT_INSTRUMENTATION"
+      },
+      "groups": [
+        {
+          "fields": {
+            "event_sub_group": "AUTH",
+            "machine_id": "#string",
+            "spins_selected": "#bool"
+          },
+          "events": [
+            {
+              "id": "LOGGED_IN",
+              "fields": { "event_type": "LOGGED_IN" }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
