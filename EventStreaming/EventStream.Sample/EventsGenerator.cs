@@ -50,7 +50,80 @@ namespace EventStream.Generator
             
             #line default
             #line hidden
-            this.Write("\n{\n    public static partial class ");
+            this.Write(@"
+{
+    public class AmbientContext : IAmbientContext
+    {
+        private readonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>();
+
+		public IEnumerable<KeyValuePair<string, object>> GetAmbientData()
+		{
+		    return _dynamicValues;
+		}
+");
+            
+            #line 1 "C:\IrfanView\eventstreamingv2\EventStreaming\EventStream.Sample\EventsGenerator.tt"
+ foreach(var field in _ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>()) { 
+            
+            #line default
+            #line hidden
+            this.Write("\n        public void Set");
+            
+            #line 1 "C:\IrfanView\eventstreamingv2\EventStreaming\EventStream.Sample\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            this.Write("(");
+            
+            #line 1 "C:\IrfanView\eventstreamingv2\EventStreaming\EventStream.Sample\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Type.ToString().ToLowerCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 1 "C:\IrfanView\eventstreamingv2\EventStreaming\EventStream.Sample\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(")\n        {\n            _dynamicValues[\"");
+            
+            #line 1 "C:\IrfanView\eventstreamingv2\EventStreaming\EventStream.Sample\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\"] = ");
+            
+            #line 1 "C:\IrfanView\eventstreamingv2\EventStreaming\EventStream.Sample\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("; \n        }\n        \n        public void Clear");
+            
+            #line 1 "C:\IrfanView\eventstreamingv2\EventStreaming\EventStream.Sample\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            this.Write("()\n        {\n            _dynamicValues.Remove(\"");
+            
+            #line 1 "C:\IrfanView\eventstreamingv2\EventStreaming\EventStream.Sample\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\"); \n        }\n");
+            
+            #line 1 "C:\IrfanView\eventstreamingv2\EventStreaming\EventStream.Sample\EventsGenerator.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\n    }\n\n    public static partial class ");
             
             #line 1 "C:\IrfanView\eventstreamingv2\EventStreaming\EventStream.Sample\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_className));

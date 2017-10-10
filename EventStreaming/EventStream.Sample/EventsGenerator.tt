@@ -15,6 +15,27 @@ using EventStreaming;
 
 namespace <#=_namespace#>
 {
+    public class AmbientContext : IAmbientContext
+    {
+        private readonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>();
+
+		public IEnumerable<KeyValuePair<string, object>> GetAmbientData()
+		{
+		    return _dynamicValues;
+		}
+<# foreach(var field in _ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>()) { #>
+        public void Set<#=field.Name.ToPascalCase()#>(<#=field.Type.ToString().ToLowerCamelCase()#> <#=field.Name.ToLowerCamelCase()#>)
+        {
+            _dynamicValues["<#=field.Name#>"] = <#=field.Name.ToLowerCamelCase()#>; 
+        }
+        
+        public void Clear<#=field.Name.ToPascalCase()#>()
+        {
+            _dynamicValues.Remove("<#=field.Name#>"); 
+        }
+<# } #>
+    }
+
     public static partial class <#=_className#>
     {
 <# foreach(var @event in _events) { #>
