@@ -11,6 +11,8 @@
 <#@ import namespace="EventStreaming" #>
 <#@ import namespace="EventStreaming.Configuration" #>
 using System.Collections.Generic;
+using System.Linq;
+using System;
 using EventStreaming;
 
 namespace <#=_namespace#>
@@ -18,20 +20,35 @@ namespace <#=_namespace#>
     public class AmbientContext : IAmbientContext
     {
         private readonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>();
+        private readonly Dictionary<string, Func<object>> _evaluatedValues = new Dictionary<string, Func<object>>();
 
 		public IEnumerable<KeyValuePair<string, object>> GetAmbientData()
 		{
-		    return _dynamicValues;
+		    return Enumerable.Union(
+		        _dynamicValues,
+		        _evaluatedValues.Select(kv => new KeyValuePair<string, object>(kv.Key, kv.Value()))
+		        );
 		}
 <# foreach(var field in _ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>()) { #>
         public void Set<#=field.Name.ToPascalCase()#>(<#=field.Type.ToString().ToLowerCamelCase()#> <#=field.Name.ToLowerCamelCase()#>)
         {
-            _dynamicValues["<#=field.Name#>"] = <#=field.Name.ToLowerCamelCase()#>; 
+            _dynamicValues["<#=field.Name#>"] = <#=field.Name.ToLowerCamelCase()#>;
         }
-        
+
         public void Clear<#=field.Name.ToPascalCase()#>()
         {
             _dynamicValues.Remove("<#=field.Name#>"); 
+        }
+<# } #>
+<# foreach(var field in _ambientFieldDefinitions.Values.OfType<EvaluatedFieldDefinition>()) { #>
+        public void Set<#=field.Name.ToPascalCase()#>Func(Func<<#=field.Type.ToString().ToLowerCamelCase()#>> <#=field.Name.ToLowerCamelCase()#>)
+        {
+            _evaluatedValues["<#=field.Name#>"] = () => <#=field.Name.ToLowerCamelCase()#>();
+        }
+
+        public void Clear<#=field.Name.ToPascalCase()#>Func()
+        {
+            _evaluatedValues.Remove("<#=field.Name#>"); 
         }
 <# } #>
     }

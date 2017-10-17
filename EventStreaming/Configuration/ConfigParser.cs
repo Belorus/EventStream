@@ -46,6 +46,11 @@ namespace EventStreaming.Configuration
                     fieldDefinitions[fieldToken.Key] = new DynamicFieldDefinition(fieldToken.Key,
                         (FieldType) Enum.Parse(typeof(FieldType), fieldValue.Substring(1), true));
                 }
+                else if (fieldValue.StartsWith("$", StringComparison.Ordinal))
+                {
+                    fieldDefinitions[fieldToken.Key] = new EvaluatedFieldDefinition(fieldToken.Key,
+                        (FieldType) Enum.Parse(typeof(FieldType), fieldValue.Substring(1), true));
+                } 
                 else
                 {
                     fieldDefinitions[fieldToken.Key] = new StaticFieldDefinition(fieldToken.Key, fieldValue);

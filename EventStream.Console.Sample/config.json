@@ -1,30 +1,30 @@
-// Data types: #string, #long, #int, #float, #double, #bool
+// Data types: string, long, int, float, double, bool
+// # - values are passed by called
+// $ - evaluated via delegate
 
 {
   "fields": {
-    "facility": "#string",
     "user_id": "#string",
     "platform_type": "#string",
     "session_id": "#string",
     "user_sn_id": "#string",
     "login_mode": "#string",
-    "client_timestamp": "#long",
     "app_version": "#string",
     "os_name": "#string",
-    "os_version": "#string"
+    "os_version": "#string",
+
+    "timestamp": "$long"
   },
   "groups": [
     {
       "percent": 2,
       "fields": {
-        "event_group": "CLIENT_INSTRUMENTATION"
+        "event_group": "BBNC_CLIENT_INSTRUMENTATION"
       },
       "groups": [
         {
           "fields": {
-            "event_sub_group": "AUTH",
-            "machine_id": "#string",
-            "spins_selected": "#bool"
+            "event_sub_group": "AUTH"
           },
           "events": [
             {

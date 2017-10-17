@@ -7,7 +7,7 @@ namespace EventStreaming
     public class BufferingEventDispatcher : IEventDispatcher
     {
         private readonly IEventSender _sender;
-        
+
         private readonly Queue<Event> _queue = new Queue<Event>();
         private Timer _timer;
 
@@ -16,16 +16,21 @@ namespace EventStreaming
         {
             _sender = sender;
         }
-        
+
         public TimeSpan FlushDelay { get; set; } = TimeSpan.FromSeconds(10);
 
         public int MaxQueueSize { get; set; } = 10;
-        
+
         public void Dispatch(Event eventToSend)
         {
-            _queue.Enqueue(eventToSend);
+            bool isQueueFull;
+            lock (_queue)
+            {
+                _queue.Enqueue(eventToSend);
+                isQueueFull = _queue.Count > MaxQueueSize;
+            }
 
-            if (_queue.Count > MaxQueueSize)
+            if (isQueueFull)
             {
                 Flush();
             }
@@ -47,13 +52,19 @@ namespace EventStreaming
         {
             _timer?.Dispose();
             _timer = null;
-            
+
             Flush();
         }
 
         private void Flush()
         {
-            _sender.SendEvents(_queue.ToArray());
+            Event[] array;
+            lock (_queue)
+            {
+                array = _queue.ToArray();
+                _queue.Clear();
+            }
+            _sender.SendEvents(array);
         }
     }
 }

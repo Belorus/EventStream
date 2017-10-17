@@ -35,8 +35,7 @@ namespace EventStreaming
                 throw new ArgumentException($"Unknown event {eventToSend.Name}");
 
             var additionalFields = Enumerable.Union(
-                definition.Fields.Values.OfType<StaticFieldDefinition>()
-                    .Select(f => new KeyValuePair<string, object>(f.Name, f.Value)),
+                definition.Fields.Values.OfType<StaticFieldDefinition>().Select(f => new KeyValuePair<string, object>(f.Name, f.Value)),
                 _ambientContext.GetAmbientData());
 
             return new Event(
