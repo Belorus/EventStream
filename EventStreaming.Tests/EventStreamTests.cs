@@ -27,7 +27,7 @@ namespace EventStreaming.Tests
             
             var sut = new EventStream(ambientContext.Object, dispatcherMock.Object, config);
 
-            sut.QueueSending(new Event("TEST", new KeyValuePair<string, object>[0]));
+            sut.SendAsync(new Event("TEST", new KeyValuePair<string, object>[0]));
 
             dispatcherMock.Verify(x => x.Dispatch(It.Is<Event>(e =>
                 e.Fields.Length == 2 &&

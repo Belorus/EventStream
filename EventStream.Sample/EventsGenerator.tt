@@ -56,7 +56,7 @@ namespace <#=_namespace#>
     public static partial class <#=_className#>
     {
 <# foreach(var @event in _events) { #>
-        public static Event <#=@event.Name#>(<#=string.Join(", ", @event.Fields.Values.OfType<DynamicFieldDefinition>().Select(f => "string " + f.Name.ToLowerCamelCase()))#>)
+        public static Event <#=@event.Name#>(<#=string.Join(", ", @event.Fields.Values.OfType<DynamicFieldDefinition>().Select(f => f.Type.ToString().ToLowerCamelCase() + " " + f.Name.ToLowerCamelCase()))#>)
         {
             var e = new Event("<#=@event.Name#>",
 			new[]
@@ -68,8 +68,8 @@ namespace <#=_namespace#>
                 new KeyValuePair<string, object>("<#=field.Name#>", "<#=field.Value#>"),
 <#          }#>
             });
-<#          }#>
             return e;
-        }
+		}
+<#          }#>
     }
 }

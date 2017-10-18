@@ -5,7 +5,7 @@ using EventStreaming.Configuration;
 
 namespace EventStreaming
 {
-    public class EventStream
+    public class EventStream : IEventStream
     {
         private readonly IAmbientContext _ambientContext;
         private readonly IEventDispatcher _dispatcher;
@@ -21,17 +21,16 @@ namespace EventStreaming
             _configuration = configuration;
         }
         
-        public void QueueSending(Event eventToSend)
+        public void SendAsync(Event eventToSend)
         {
             var richEvent = CreateRichEvent(eventToSend);
 
             _dispatcher.Dispatch(richEvent);
         }
 
-        public Event CreateRichEvent(Event eventToSend)
+        private Event CreateRichEvent(Event eventToSend)
         {
-            EventDefinition definition;
-            if (!_configuration.AllEvents.TryGetValue(eventToSend.Name, out definition))
+            if (!_configuration.AllEvents.TryGetValue(eventToSend.Name, out var definition))
                 throw new ArgumentException($"Unknown event {eventToSend.Name}");
 
             var additionalFields = Enumerable.Union(

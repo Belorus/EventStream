@@ -15,7 +15,7 @@ namespace EventStream.Console.Sample
                 new BufferingEventDispatcher(new HttpSender("http://estream.playtika.com/CL/")){ MaxQueueSize = 0 }, 
                 config);
 
-            eventStreaming.QueueSending(Events.LOGGED_IN());
+            eventStreaming.SendAsync(Events.LOGGED_IN());
 
             System.Console.ReadLine();
         }
