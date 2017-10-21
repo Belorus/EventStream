@@ -9,15 +9,18 @@ namespace EventStreaming
     {
         private readonly IAmbientContext _ambientContext;
         private readonly IEventDispatcher _dispatcher;
-        private readonly FullEventsConfiguration _configuration;
+        private readonly EventStreamSettings _settings;
+        private readonly EventsConfiguration _configuration;
 
         public EventStream(
             IAmbientContext ambientContext,
             IEventDispatcher dispatcher,
-            FullEventsConfiguration configuration)
+            EventStreamSettings settings,
+            EventsConfiguration configuration)
         {
             _ambientContext = ambientContext;
             _dispatcher = dispatcher;
+            _settings = settings;
             _configuration = configuration;
         }
         
@@ -33,8 +36,14 @@ namespace EventStreaming
 
         private bool IsEligibleForBeingSent(Event eventToSend)
         {
+            if (!_settings.IsEnabled)
+                return false;
+            
             if (!_configuration.AllEvents.TryGetValue(eventToSend.Name, out var definition))
                 throw new ArgumentException($"Unknown event {eventToSend.Name}");
+
+            if (!_settings.IsSamplingEnabled)
+                return true;
 
             int percent = _ambientContext.UserSeed % 100;
 

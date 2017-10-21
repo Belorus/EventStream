@@ -11,7 +11,7 @@ namespace EventStreaming.Tests
         public void Referenced_Fields_Are_Added()
         {
             var ambientField = new DynamicFieldDefinition("A1", ConfigParser.FieldType.String);
-            var config = new FullEventsConfiguration(
+            var config = new EventsConfiguration(
                 new Dictionary<string, EventDefinition>
                 {
                     {
@@ -28,7 +28,7 @@ namespace EventStreaming.Tests
                           
             var dispatcherMock = new Mock<IEventDispatcher>();
 
-            var sut = new EventStream(ambientContext.Object, dispatcherMock.Object, config);
+            var sut = new EventStream(ambientContext.Object, dispatcherMock.Object, new EventStreamSettings(), config);
 
             sut.SendAsync(new Event("TEST", new KeyValuePair<string, object>[0]));
 
@@ -41,14 +41,14 @@ namespace EventStreaming.Tests
         [Fact]
         public void Event_Is_Sampled_By_Seed()
         {
-            var config = new FullEventsConfiguration(
+            var config = new EventsConfiguration(
                 new Dictionary<string, EventDefinition>{ {"TEST", new EventDefinition(new Dictionary<string, IFieldDefinition>(), 5, "TEST")}},
                 new Dictionary<string, IFieldDefinition>());
 
             var ambientContext = new Mock<IAmbientContext>();
             var dispatcherMock = new Mock<IEventDispatcher>();
             
-            var sut = new EventStream(ambientContext.Object, dispatcherMock.Object, config);
+            var sut = new EventStream(ambientContext.Object, dispatcherMock.Object, new EventStreamSettings(), config);
 
             for (int i = 0; i < 1000; i++) 
             {

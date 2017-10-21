@@ -13,7 +13,8 @@ namespace EventStream.Console.Sample
             var context = new AmbientContext();
             var eventStreaming = new EventStreaming.EventStream(
                 context, 
-                new BufferingEventDispatcher(new HttpSender("http://estream.playtika.com/CL/")){ MaxQueueSize = 0 }, 
+                new BufferingEventDispatcher(new HttpSender("http://estream.playtika.com/CL/")){ MaxQueueSize = 0 },
+                new EventStreamSettings(),
                 config);
 
             eventStreaming.SendAsync(Events.PURCHASE());

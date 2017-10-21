@@ -15,7 +15,7 @@ namespace EventStreaming.Configuration
             _configDataStream = configDataStream;
         }
 
-        public FullEventsConfiguration ReadFullConfig()
+        public EventsConfiguration ReadFullConfig()
         {
             using (StreamReader sr = new StreamReader(_configDataStream))
             {
@@ -28,7 +28,7 @@ namespace EventStreaming.Configuration
                 var allEvents = ParseGroups(groups, ambientFieldDefinitions, new Dictionary<string, IFieldDefinition>(), 100)
                     .ToDictionary(e => e.Name, e => e);
 
-                return new FullEventsConfiguration(allEvents, ambientFieldDefinitions);
+                return new EventsConfiguration(allEvents, ambientFieldDefinitions);
             }
         }
 
