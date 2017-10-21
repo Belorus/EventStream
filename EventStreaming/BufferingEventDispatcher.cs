@@ -11,8 +11,7 @@ namespace EventStreaming
         private readonly Queue<Event> _queue = new Queue<Event>();
         private Timer _timer;
 
-        public BufferingEventDispatcher(
-            IEventSender sender)
+        public BufferingEventDispatcher(IEventSender sender)
         {
             _sender = sender;
         }

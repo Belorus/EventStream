@@ -45,11 +45,12 @@ namespace EventStreaming
         {
             var eventFields = _configuration.AllEvents[eventToSend.Name].Fields.Values;
 
-            // Take values (static, dynamic, evaluated) from ambient context
+            // Take STATIC, DYNAMIC, EVALUATED values from ambient context
             var referencedValues = eventFields.OfType<ReferenceFieldDefinition>()
-                .Select(rf => new KeyValuePair<string,object>(rf.Name, _ambientContext.GetValue(rf.ReferencedField.Name)));
+                .Select(rf => new KeyValuePair<string,object>(rf.Name, _ambientContext.GetValue(rf.ReferencedField.Name)))
+                .Where(f => f.Value != null);
 
-            // Combine them with static and dynamic fields from event
+            // Combine them with STATIC and DYNAMIC values from event
             var allFields = eventToSend.Fields
                 .Concat(eventFields.OfType<StaticFieldDefinition>().Select(f => new KeyValuePair<string, object>(f.Name, f.Value)))
                 .Concat(referencedValues)
