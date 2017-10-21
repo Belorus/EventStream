@@ -23,23 +23,39 @@ namespace EventStreaming
         
         public void SendAsync(Event eventToSend)
         {
-            var richEvent = CreateRichEvent(eventToSend);
+            if (IsEligibleForBeingSent(eventToSend))
+            {
+                var richEvent = CreateRichEvent(eventToSend);
 
-            _dispatcher.Dispatch(richEvent);
+                _dispatcher.Dispatch(richEvent);
+            }
         }
 
-        private Event CreateRichEvent(Event eventToSend)
+        private bool IsEligibleForBeingSent(Event eventToSend)
         {
             if (!_configuration.AllEvents.TryGetValue(eventToSend.Name, out var definition))
                 throw new ArgumentException($"Unknown event {eventToSend.Name}");
 
-            var additionalFields = Enumerable.Union(
-                definition.Fields.Values.OfType<StaticFieldDefinition>().Select(f => new KeyValuePair<string, object>(f.Name, f.Value)),
-                _ambientContext.GetAmbientData());
+            int percent = _ambientContext.UserSeed % 100;
 
-            return new Event(
-                eventToSend.Name,
-                Enumerable.Union(additionalFields, eventToSend.Fields).ToArray());
+            return percent < definition.Percent;
+        }
+
+        private Event CreateRichEvent(Event eventToSend)
+        {
+            var eventFields = _configuration.AllEvents[eventToSend.Name].Fields.Values;
+
+            // Take values (static, dynamic, evaluated) from ambient context
+            var referencedValues = eventFields.OfType<ReferenceFieldDefinition>()
+                .Select(rf => new KeyValuePair<string,object>(rf.Name, _ambientContext.GetValue(rf.ReferencedField.Name)));
+
+            // Combine them with static and dynamic fields from event
+            var allFields = eventToSend.Fields
+                .Concat(eventFields.OfType<StaticFieldDefinition>().Select(f => new KeyValuePair<string, object>(f.Name, f.Value)))
+                .Concat(referencedValues)
+                .ToArray();
+
+            return new Event(eventToSend.Name, allFields);
         }
     }
 }

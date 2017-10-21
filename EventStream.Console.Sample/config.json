@@ -1,9 +1,11 @@
 // Data types: string, long, int, float, double, bool
 // # - values are passed by called
 // $ - evaluated via delegate
+// @ - field reference
 
 {
-  "fields": {
+  "ambient_context": {
+    // global
     "user_id": "#string",
     "platform_type": "#string",
     "session_id": "#string",
@@ -13,13 +15,25 @@
     "os_name": "#string",
     "os_version": "#string",
 
-    "timestamp": "$long"
+    "timestamp": "$long",
+
+    // optional    
+    "transaction_funnel": "#string"
   },
   "groups": [
     {
       "percent": 2,
       "fields": {
-        "event_group": "BBNC_CLIENT_INSTRUMENTATION"
+        "event_group": "BBNC_CLIENT_INSTRUMENTATION",
+
+        "user_id": "@user_id",
+        "platform_type": "@platform_type",
+        "session_id": "@session_id",
+        "user_sn_id": "@user_sn_id",
+        "login_mode": "@login_mode",
+        "app_version": "@app_version",
+        "os_name": "@os_name",
+        "os_version": "@os_version",
       },
       "groups": [
         {
@@ -30,7 +44,13 @@
             {
               "id": "LOGGED_IN",
               "fields": { "event_type": "LOGGED_IN" }
-            }
+            },
+            {
+              "id": "PURCHASE",
+              "fields": { 
+		  "event_type": "PURCHASE", 
+                  "purchase_funnel": "@transaction_funnel"},
+            }  
           ]
         }
       ]

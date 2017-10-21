@@ -42,7 +42,6 @@ namespace EventStream.Generator
             this.Write("\n");
             this.Write("\n");
             this.Write("\n");
-            this.Write("\n");
             this.Write("\nusing System.Collections.Generic;\nusing System.Linq;\nusing System;\nusing EventSt" +
                     "reaming;\n\nnamespace ");
             
@@ -51,20 +50,45 @@ namespace EventStream.Generator
             
             #line default
             #line hidden
-            this.Write(@"
-{
-    public class AmbientContext : IAmbientContext
-    {
-        private readonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>();
-        private readonly Dictionary<string, Func<object>> _evaluatedValues = new Dictionary<string, Func<object>>();
+            this.Write("\n{\n    public class AmbientContext : IAmbientContext\n    {\n        private readon" +
+                    "ly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>(");
+            
+            #line 1 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Sample\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>().Count()));
+            
+            #line default
+            #line hidden
+            this.Write(");\n        private readonly Dictionary<string, Func<object>> _evaluatedValues = n" +
+                    "ew Dictionary<string, Func<object>>(");
+            
+            #line 1 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Sample\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_ambientFieldDefinitions.Values.OfType<EvaluatedFieldDefinition>().Count()));
+            
+            #line default
+            #line hidden
+            this.Write(@");
 
-		public IEnumerable<KeyValuePair<string, object>> GetAmbientData()
-		{
-		    return Enumerable.Union(
-		        _dynamicValues,
-		        _evaluatedValues.Select(kv => new KeyValuePair<string, object>(kv.Key, kv.Value()))
-		        );
-		}
+        public int UserSeed { get; set; }
+
+		public object GetValue(string key)
+        {
+            if (_dynamicValues.TryGetValue(key, out var value))
+            {
+                return value;
+            }
+            else
+            {
+                if (_evaluatedValues.TryGetValue(key, out var func))
+                {
+                    return func();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
 ");
             
             #line 1 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Sample\EventsGenerator.tt"
@@ -226,7 +250,7 @@ namespace EventStream.Generator
             
             #line default
             #line hidden
-            this.Write("\",\n\t\t\tnew[]\n            {\n");
+            this.Write("\",\n\t\t\tnew KeyValuePair<string, object>[]\n            {\n");
             
             #line 1 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Sample\EventsGenerator.tt"
           foreach(var field in @event.Fields.Values.OfType<DynamicFieldDefinition>()) {
@@ -248,34 +272,6 @@ namespace EventStream.Generator
             #line default
             #line hidden
             this.Write("),\n");
-            
-            #line 1 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Sample\EventsGenerator.tt"
-          }
-            
-            #line default
-            #line hidden
-            this.Write("\n");
-            
-            #line 1 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Sample\EventsGenerator.tt"
-          foreach(var field in @event.Fields.Values.OfType<StaticFieldDefinition>()) {
-            
-            #line default
-            #line hidden
-            this.Write("\n                new KeyValuePair<string, object>(\"");
-            
-            #line 1 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Sample\EventsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\", \"");
-            
-            #line 1 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Sample\EventsGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Value));
-            
-            #line default
-            #line hidden
-            this.Write("\"),\n");
             
             #line 1 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Sample\EventsGenerator.tt"
           }

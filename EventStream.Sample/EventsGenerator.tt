@@ -1,7 +1,6 @@
 ﻿<#@ template debug="true" hostSpecific="true" #>
 <#@ output extension=".cs" #>
 <#@ Assembly Name="System.Core" #>
-<#@ Assembly Name="System.Windows.Forms" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Diagnostics" #>
@@ -19,16 +18,30 @@ namespace <#=_namespace#>
 {
     public class AmbientContext : IAmbientContext
     {
-        private readonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>();
-        private readonly Dictionary<string, Func<object>> _evaluatedValues = new Dictionary<string, Func<object>>();
+        private readonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>(<#=_ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>().Count()#>);
+        private readonly Dictionary<string, Func<object>> _evaluatedValues = new Dictionary<string, Func<object>>(<#=_ambientFieldDefinitions.Values.OfType<EvaluatedFieldDefinition>().Count()#>);
 
-		public IEnumerable<KeyValuePair<string, object>> GetAmbientData()
-		{
-		    return Enumerable.Union(
-		        _dynamicValues,
-		        _evaluatedValues.Select(kv => new KeyValuePair<string, object>(kv.Key, kv.Value()))
-		        );
-		}
+        public int UserSeed { get; set; }
+
+		public object GetValue(string key)
+        {
+            if (_dynamicValues.TryGetValue(key, out var value))
+            {
+                return value;
+            }
+            else
+            {
+                if (_evaluatedValues.TryGetValue(key, out var func))
+                {
+                    return func();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
 <# foreach(var field in _ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>()) { #>
         public void Set<#=field.Name.ToPascalCase()#>(<#=field.Type.ToString().ToLowerCamelCase()#> <#=field.Name.ToLowerCamelCase()#>)
         {
@@ -59,13 +72,10 @@ namespace <#=_namespace#>
         public static Event <#=@event.Name#>(<#=string.Join(", ", @event.Fields.Values.OfType<DynamicFieldDefinition>().Select(f => f.Type.ToString().ToLowerCamelCase() + " " + f.Name.ToLowerCamelCase()))#>)
         {
             var e = new Event("<#=@event.Name#>",
-			new[]
+			new KeyValuePair<string, object>[]
             {
 <#          foreach(var field in @event.Fields.Values.OfType<DynamicFieldDefinition>()) {#>
                 new KeyValuePair<string, object>("<#=field.Name#>", <#=field.Name.ToLowerCamelCase()#>),
-<#          }#>
-<#          foreach(var field in @event.Fields.Values.OfType<StaticFieldDefinition>()) {#>
-                new KeyValuePair<string, object>("<#=field.Name#>", "<#=field.Value#>"),
 <#          }#>
             });
             return e;

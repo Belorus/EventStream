@@ -9,26 +9,39 @@
 
 
 
-
 using System.Collections.Generic;
 using System.Linq;
 using System;
 using EventStreaming;
 
-namespace EventStream.Console.Sample
+namespace BB
 {
     public class AmbientContext : IAmbientContext
     {
-        private readonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>();
-        private readonly Dictionary<string, Func<object>> _evaluatedValues = new Dictionary<string, Func<object>>();
+        private readonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>(9);
+        private readonly Dictionary<string, Func<object>> _evaluatedValues = new Dictionary<string, Func<object>>(1);
 
-		public IEnumerable<KeyValuePair<string, object>> GetAmbientData()
-		{
-		    return Enumerable.Union(
-		        _dynamicValues,
-		        _evaluatedValues.Select(kv => new KeyValuePair<string, object>(kv.Key, kv.Value()))
-		        );
-		}
+        public int UserSeed { get; set; }
+
+		public object GetValue(string key)
+        {
+            if (_dynamicValues.TryGetValue(key, out var value))
+            {
+                return value;
+            }
+            else
+            {
+                if (_evaluatedValues.TryGetValue(key, out var func))
+                {
+                    return func();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
 
         public void SetUserId(string userId)
         {
@@ -110,10 +123,20 @@ namespace EventStream.Console.Sample
             _dynamicValues.Remove("os_version"); 
         }
 
-
-        public void SetTimestampFunc(Func<string> timestamp)
+        public void SetTransactionFunnel(string transactionFunnel)
         {
-            _evaluatedValues["timestamp"] = timestamp;
+            _dynamicValues["transaction_funnel"] = transactionFunnel;
+        }
+
+        public void ClearTransactionFunnel()
+        {
+            _dynamicValues.Remove("transaction_funnel"); 
+        }
+
+
+        public void SetTimestampFunc(Func<long> timestamp)
+        {
+            _evaluatedValues["timestamp"] = () => timestamp();
         }
 
         public void ClearTimestampFunc()
@@ -129,19 +152,22 @@ namespace EventStream.Console.Sample
         public static Event LOGGED_IN()
         {
             var e = new Event("LOGGED_IN",
-			new[]
+			new KeyValuePair<string, object>[]
             {
 
+            });
+            return e;
+		}
 
-                new KeyValuePair<string, object>("event_type", "LOGGED_IN"),
-
-                new KeyValuePair<string, object>("event_sub_group", "AUTH"),
-
-                new KeyValuePair<string, object>("event_group", "BBNC_CLIENT_INSTRUMENTATION"),
+        public static Event PURCHASE()
+        {
+            var e = new Event("PURCHASE",
+			new KeyValuePair<string, object>[]
+            {
 
             });
-
             return e;
-        }
+		}
+
     }
 }
