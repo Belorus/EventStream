@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace EventStreaming
 {
@@ -15,5 +16,10 @@ namespace EventStreaming
         }
 
         public readonly KeyValuePair<string, object>[] Fields;
+
+        public Event With(IEnumerable<KeyValuePair<string, object>> fields)
+        {
+            return new Event(Name, Fields.Union(fields).ToArray());
+        }
     }
 }
