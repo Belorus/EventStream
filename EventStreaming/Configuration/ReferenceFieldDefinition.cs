@@ -12,5 +12,10 @@ namespace EventStreaming.Configuration
 
         public string Name { get; }
         public IFieldDefinition ReferencedField { get; }
+        
+        public override string ToString()
+        {
+            return $"{Name} : @{ReferencedField}>";
+        }
     }
 }
