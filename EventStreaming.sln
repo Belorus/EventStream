@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventStreaming", "EventStreaming\EventStreaming.csproj", "{1860E462-3847-412E-A6B1-8C728EA28511}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStream.Generator", "EventStream.Sample\EventStream.Generator.csproj", "{E83BF7EE-B40E-4109-B2DB-1FE8FDA42F66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStream.Codegen", "EventStream.Codegen\EventStream.Codegen.csproj", "{E83BF7EE-B40E-4109-B2DB-1FE8FDA42F66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStream.Console.Sample", "EventStream.Console.Sample\EventStream.Console.Sample.csproj", "{7C8AC739-460D-4BFD-91D1-F7A35CDA2000}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStream.Sample", "EventStream.Sample\EventStream.Sample.csproj", "{7C8AC739-460D-4BFD-91D1-F7A35CDA2000}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStreaming.Tests", "EventStreaming.Tests\EventStreaming.Tests.csproj", "{25FAAE2F-9584-48E2-A995-DF5D34611C9A}"
 EndProject
