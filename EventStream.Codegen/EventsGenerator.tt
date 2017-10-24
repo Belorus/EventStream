@@ -23,7 +23,7 @@ namespace <#=_namespace#>
 
         public int UserSeed { get; set; }
 
-		public object GetValue(string key)
+        public object GetValue(string key)
         {
             if (_dynamicValues.TryGetValue(key, out var value))
             {
@@ -77,9 +77,9 @@ namespace <#=_namespace#>
                 new []
                 { <# foreach(var field in @event.Fields.Values.OfType<DynamicFieldDefinition>()) {#>
                     new KeyValuePair<string, object>("<#=field.Name#>", <#=field.Name.ToLowerCamelCase()#>), <# } #>
-				}); <# } else { #> 
-			return new Event("<#=@event.Name#>", EmptyArray); <# } #>
-		} 
-		<# }#>
+                }); <# } else { #> 
+            return new Event("<#=@event.Name#>", EmptyArray); <# } #>
+        } 
+        <# }#>
     }
 }

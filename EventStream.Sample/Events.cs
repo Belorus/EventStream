@@ -1,14 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
 using System.Collections.Generic;
 using System.Linq;
 using System;
@@ -148,26 +137,18 @@ namespace BB
 
     public static partial class Events
     {
+        private static readonly KeyValuePair<string, object>[] EmptyArray = new KeyValuePair<string, object>[0];
+
 
         public static Event LOGGED_IN()
-        {
-            var e = new Event("LOGGED_IN",
-			new KeyValuePair<string, object>[]
-            {
-
-            });
-            return e;
-		}
-
+        {  
+			return new Event("LOGGED_IN", EmptyArray); 
+		} 
+		
         public static Event PURCHASE()
-        {
-            var e = new Event("PURCHASE",
-			new KeyValuePair<string, object>[]
-            {
-
-            });
-            return e;
-		}
-
+        {  
+			return new Event("PURCHASE", EmptyArray); 
+		} 
+		
     }
 }

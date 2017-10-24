@@ -19,7 +19,7 @@ namespace EventStream.Generator
 
                     var generator = new EventsGenerator(options.ClassName, options.Namespace, config.AllEvents.Values.ToArray(), config.AmbientFieldDefinitions);
 
-                    File.WriteAllText(options.OutputClass, generator.TransformText());
+                    File.WriteAllText(options.OutputClass, generator.TransformText().Trim());
                 }
             }
             else
