@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using EventStreaming.Configuration;
 
 namespace EventStreaming
@@ -50,22 +51,36 @@ namespace EventStreaming
             return percent < definition.Percent;
         }
 
+        // Method is implemented via List<T> without LINQ to achieve better performance and reduce memory traffic 
         private Event CreateRichEvent(Event eventToSend)
         {
             var eventFields = _configuration.AllEvents[eventToSend.Name].Fields.Values;
 
-            // Take STATIC, DYNAMIC, EVALUATED values from ambient context
-            var referencedValues = eventFields.OfType<ReferenceFieldDefinition>()
-                .Select(rf => new KeyValuePair<string,object>(rf.Name, _ambientContext.GetValue(rf.ReferencedField.Name)))
-                .Where(f => f.Value != null);
+            var list = new List<KeyValuePair<string, object>>(eventFields.Count);
 
-            // Combine them with STATIC and DYNAMIC values from event
-            var allFields = eventToSend.Fields
-                .Concat(eventFields.OfType<StaticFieldDefinition>().Select(f => new KeyValuePair<string, object>(f.Name, f.Value)))
-                .Concat(referencedValues)
-                .ToArray();
+            foreach (var field in eventFields)
+            {
+                // Take STATIC, DYNAMIC, EVALUATED values from ambient context
+                if (field is ReferenceFieldDefinition referenceField)
+                {
+                    var value = _ambientContext.GetValue(referenceField.ReferencedField.Name);
+                    if (value != null)
+                        list.Add(new KeyValuePair<string, object>(referenceField.Name, value));
+                }
 
-            return new Event(eventToSend.Name, allFields);
+                // Add STATIC fields from configuration
+                if (field is StaticFieldDefinition staticField && staticField.Value != null)
+                    list.Add(new KeyValuePair<string, object>(staticField.Name, staticField.Value));
+            }
+
+            // Combine them with DYNAMIC values from event
+            foreach (var field in eventToSend.Fields)
+            {
+                if (field.Value != null)
+                    list.Add(field);
+            }
+
+            return new Event(eventToSend.Name, list);
         }
     }
 }

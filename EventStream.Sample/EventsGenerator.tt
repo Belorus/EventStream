@@ -68,18 +68,18 @@ namespace <#=_namespace#>
 
     public static partial class <#=_className#>
     {
+        private static readonly KeyValuePair<string, object>[] EmptyArray = new KeyValuePair<string, object>[0];
+
 <# foreach(var @event in _events) { #>
         public static Event <#=@event.Name#>(<#=string.Join(", ", @event.Fields.Values.OfType<DynamicFieldDefinition>().Select(f => f.Type.ToString().ToLowerCamelCase() + " " + f.Name.ToLowerCamelCase()))#>)
-        {
-            var e = new Event("<#=@event.Name#>",
-			new KeyValuePair<string, object>[]
-            {
-<#          foreach(var field in @event.Fields.Values.OfType<DynamicFieldDefinition>()) {#>
-                new KeyValuePair<string, object>("<#=field.Name#>", <#=field.Name.ToLowerCamelCase()#>),
-<#          }#>
-            });
-            return e;
-		}
-<#          }#>
+        { <# if (@event.Fields.Values.OfType<DynamicFieldDefinition>().Any()) { #> 
+            return new Event("<#=@event.Name#>",
+                new []
+                { <# foreach(var field in @event.Fields.Values.OfType<DynamicFieldDefinition>()) {#>
+                    new KeyValuePair<string, object>("<#=field.Name#>", <#=field.Name.ToLowerCamelCase()#>), <# } #>
+				}); <# } else { #> 
+			return new Event("<#=@event.Name#>", EmptyArray); <# } #>
+		} 
+		<# }#>
     }
 }
