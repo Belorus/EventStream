@@ -12,7 +12,7 @@ namespace BB
 
         public int UserSeed { get; set; }
 
-		public object GetValue(string key)
+        public object GetValue(string key)
         {
             if (_dynamicValues.TryGetValue(key, out var value))
             {
@@ -142,13 +142,13 @@ namespace BB
 
         public static Event LOGGED_IN()
         {  
-			return new Event("LOGGED_IN", EmptyArray); 
-		} 
-		
+            return new Event("LOGGED_IN", EmptyArray); 
+        } 
+        
         public static Event PURCHASE()
         {  
-			return new Event("PURCHASE", EmptyArray); 
-		} 
-		
+            return new Event("PURCHASE", EmptyArray); 
+        } 
+        
     }
 }

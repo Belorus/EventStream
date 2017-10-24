@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace EventStream.Console.Sample
                 {
                     JsonSerializer jsonSerializer = new JsonSerializer();
                     jsonTextWriter.Formatting = Formatting.None;
-                    jsonSerializer.Serialize(jsonTextWriter, events);
+                    jsonSerializer.Serialize(jsonTextWriter, events.Select(ev => ev.Fields.ToDictionary(kv => kv.Key, kv => kv.Value)));
                 }
             }
 
