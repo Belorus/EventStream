@@ -9,9 +9,9 @@
         }
 
         public string Value { get; }
-        
+
         public string Name { get; }
-        
+
         public override string ToString()
         {
             return $"{Name} : `{Value}`";

@@ -50,7 +50,7 @@ namespace <#=_namespace#>
 
         public void Clear<#=field.Name.ToPascalCase()#>()
         {
-            _dynamicValues.Remove("<#=field.Name#>"); 
+            _dynamicValues.Remove("<#=field.Name#>");
         }
 <# } #>
 <# foreach(var field in _ambientFieldDefinitions.Values.OfType<EvaluatedFieldDefinition>()) { #>
@@ -61,7 +61,7 @@ namespace <#=_namespace#>
 
         public void Clear<#=field.Name.ToPascalCase()#>Func()
         {
-            _evaluatedValues.Remove("<#=field.Name#>"); 
+            _evaluatedValues.Remove("<#=field.Name#>");
         }
 <# } #>
     }
@@ -78,7 +78,7 @@ namespace <#=_namespace#>
                 { <# foreach(var field in @event.Fields.Values.OfType<DynamicFieldDefinition>()) {#>
                     new KeyValuePair<string, object>("<#=field.Name#>", <#=field.Name.ToLowerCamelCase()#>), <# } #>
                 }); <# } else { #> 
-            return new Event("<#=@event.Name#>", EmptyArray); <# } #>
+            return new Event("<#=@event.Name#>", EmptyArray);<# } #>
         } 
         <# }#>
     }

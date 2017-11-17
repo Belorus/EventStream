@@ -17,7 +17,11 @@ namespace EventStream.Generator
                     var parser = new ConfigParser(file);
                     var config = parser.ReadFullConfig();
 
-                    var generator = new EventsGenerator(options.ClassName, options.Namespace, config.AllEvents.Values.ToArray(), config.AmbientFieldDefinitions);
+                    var generator = new EventsGenerator(
+                        options.ClassName, 
+                        options.Namespace,
+                        config.AllEvents.Values.ToArray(), 
+                        config.AmbientFieldDefinitions);
 
                     File.WriteAllText(options.OutputClass, generator.TransformText().Trim());
                 }

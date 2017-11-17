@@ -4,9 +4,9 @@ namespace EventStreaming.Configuration
 {
     public class EventDefinition
     {
-        public readonly double Percent;
         public readonly Dictionary<string, IFieldDefinition> Fields;
         public readonly string Name;
+        public readonly double Percent;
 
         public EventDefinition(
             Dictionary<string, IFieldDefinition> fieldDefinitions,

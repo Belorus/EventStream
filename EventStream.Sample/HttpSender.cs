@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using EventStreaming;
+using EventStreaming.Abstractions;
 using Newtonsoft.Json;
 
 namespace EventStream.Console.Sample
@@ -19,36 +20,42 @@ namespace EventStream.Console.Sample
             _url = url;
         }
 
-        public async Task<bool> SendEvents(Event[] events)
+        public async Task<bool> SendEvents(IReadOnlyList<Event> events)
         {
-            var httpClient = new HttpClient();
+            var jsonBytes = SerializeToJson(events);
 
-            var preresultStream = new MemoryStream();
-
-            using (StreamWriter writer = new StreamWriter(preresultStream, _utf8WithoutBom, 512, true))
-            {
-                using (JsonTextWriter jsonTextWriter = new JsonTextWriter(writer))
-                {
-                    JsonSerializer jsonSerializer = new JsonSerializer();
-                    jsonTextWriter.Formatting = Formatting.None;
-                    jsonSerializer.Serialize(jsonTextWriter, events.Select(ev => ev.Fields.ToDictionary(kv => kv.Key, kv => kv.Value)));
-                }
-            }
-
-            var rawData = preresultStream.ToArray();
-
-            var nameValueCollection = new[] { new KeyValuePair<string, string>("records", Encoding.UTF8.GetString(rawData, 0, rawData.Length)) };
+            var nameValueCollection = new[] {new KeyValuePair<string, string>("records", Encoding.UTF8.GetString(jsonBytes, 0, jsonBytes.Length))};
             var content = new FormUrlEncodedContent(nameValueCollection);
 
             try
             {
-                await httpClient.PostAsync(_url, content);
+                await new HttpClient().PostAsync(_url, content);
                 return true;
             }
             catch
             {
                 return false;
             }
+        }
+
+        private byte[] SerializeToJson(IReadOnlyList<Event> events)
+        {
+            var memoryStream = new MemoryStream();
+
+            using (StreamWriter writer = new StreamWriter(memoryStream))
+            {
+                using (JsonTextWriter jsonTextWriter = new JsonTextWriter(writer))
+                {
+                    JsonSerializer jsonSerializer = new JsonSerializer();
+                    jsonTextWriter.Formatting = Formatting.None;
+                    jsonSerializer.Serialize(jsonTextWriter,
+                        events.Select(ev => ev.Fields.ToDictionary(kv => kv.Key, kv => kv.Value)));
+                }
+            }
+
+            var rawData = memoryStream.ToArray();
+
+            return rawData;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace EventStreaming
+﻿namespace EventStreaming.Abstractions
 {
     public interface IEventStream
     {

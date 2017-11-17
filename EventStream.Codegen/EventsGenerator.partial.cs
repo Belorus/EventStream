@@ -11,9 +11,9 @@ namespace EventStream.Generator
         private readonly Dictionary<string, IFieldDefinition> _ambientFieldDefinitions;
 
         public EventsGenerator(
-            string className, 
-            string @namespace, 
-            EventDefinition[] events, 
+            string className,
+            string @namespace,
+            EventDefinition[] events,
             Dictionary<string, IFieldDefinition> ambientFieldDefinitions)
         {
             _className = className;

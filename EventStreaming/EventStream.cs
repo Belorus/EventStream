@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
+using EventStreaming.Abstractions;
 using EventStreaming.Configuration;
 
 namespace EventStreaming
@@ -24,7 +23,7 @@ namespace EventStreaming
             _settings = settings;
             _configuration = configuration;
         }
-        
+
         public void SendAsync(Event eventToSend)
         {
             if (IsEligibleForBeingSent(eventToSend))
@@ -39,7 +38,7 @@ namespace EventStreaming
         {
             if (!_settings.IsEnabled)
                 return false;
-            
+
             if (!_configuration.AllEvents.TryGetValue(eventToSend.Name, out var definition))
                 throw new ArgumentException($"Unknown event {eventToSend.Name}");
 

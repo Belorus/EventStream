@@ -8,7 +8,6 @@
             String,
             Int,
             Long,
-            ULong,
             Float,
             Double
         }
