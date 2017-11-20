@@ -1,16 +1,16 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using BB;
 using EventStreaming;
 using EventStreaming.Configuration;
 using EventStreaming.Dispatchers;
+using EventStreaming.Senders;
 
 namespace EventStream.Console.Sample
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var config = new ConfigParser(File.OpenRead("config.json")).ReadFullConfig();
             var context = new AmbientContext();

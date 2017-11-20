@@ -1,10 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
 using System;
+using System.Collections.Generic;
 using EventStreaming;
 using EventStreaming.Abstractions;
 
-namespace BB
+namespace EventStream.Console.Sample
 {
     public class AmbientContext : IAmbientContext
     {
@@ -16,20 +15,10 @@ namespace BB
         public object GetValue(string key)
         {
             if (_dynamicValues.TryGetValue(key, out var value))
-            {
                 return value;
-            }
-            else
-            {
-                if (_evaluatedValues.TryGetValue(key, out var func))
-                {
-                    return func();
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            if (_evaluatedValues.TryGetValue(key, out var func))
+                return func();
+            return null;
         }
 
 
@@ -135,7 +124,7 @@ namespace BB
         }
     }
 
-    public static partial class Events
+    public static class Events
     {
         private static readonly KeyValuePair<string, object>[] EmptyArray = new KeyValuePair<string, object>[0];
 

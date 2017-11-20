@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EventStreaming.Abstractions;
 
-namespace EventStreaming.Dispatchers
+namespace EventStreaming.Senders
 {
     public class ConsoleEventSender : IEventSender
     {
@@ -13,9 +13,7 @@ namespace EventStreaming.Dispatchers
         public Task<bool> SendEvents(IReadOnlyList<Event> events)
         {
             foreach (var e in events)
-            {
                 Console.WriteLine($"{e.Name}: {e.Fields.Select(f => string.Format($"{f.Key}={f.Value}"))}");
-            }
 
             return _completedTask;
         }

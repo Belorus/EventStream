@@ -24,7 +24,8 @@ namespace EventStream.Console.Sample
         {
             var jsonBytes = SerializeToJson(events);
 
-            var nameValueCollection = new[] {new KeyValuePair<string, string>("records", Encoding.UTF8.GetString(jsonBytes, 0, jsonBytes.Length))};
+            var nameValueCollection = new[]
+                {new KeyValuePair<string, string>("records", Encoding.UTF8.GetString(jsonBytes, 0, jsonBytes.Length))};
             var content = new FormUrlEncodedContent(nameValueCollection);
 
             try
@@ -42,11 +43,11 @@ namespace EventStream.Console.Sample
         {
             var memoryStream = new MemoryStream();
 
-            using (StreamWriter writer = new StreamWriter(memoryStream))
+            using (var writer = new StreamWriter(memoryStream))
             {
-                using (JsonTextWriter jsonTextWriter = new JsonTextWriter(writer))
+                using (var jsonTextWriter = new JsonTextWriter(writer))
                 {
-                    JsonSerializer jsonSerializer = new JsonSerializer();
+                    var jsonSerializer = new JsonSerializer();
                     jsonTextWriter.Formatting = Formatting.None;
                     jsonSerializer.Serialize(jsonTextWriter,
                         events.Select(ev => ev.Fields.ToDictionary(kv => kv.Key, kv => kv.Value)));

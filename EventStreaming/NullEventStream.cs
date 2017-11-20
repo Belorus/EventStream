@@ -3,7 +3,7 @@
 namespace EventStreaming
 {
     /// <summary>
-    /// Null implementation does nothing. Event are not sent.
+    ///     Null implementation does nothing. Event are not sent.
     /// </summary>
     public class NullEventStream : IEventStream
     {

@@ -7,9 +7,8 @@ namespace EventStreaming.Dispatchers
 {
     public class BufferingEventDispatcher : IEventDispatcher
     {
-        private readonly IEventSender _sender;
-
         private readonly Queue<Event> _queue = new Queue<Event>();
+        private readonly IEventSender _sender;
         private Timer _timer;
 
         public BufferingEventDispatcher(IEventSender sender)
@@ -31,21 +30,15 @@ namespace EventStreaming.Dispatchers
             }
 
             if (isQueueFull)
-            {
                 Flush();
-            }
             else
-            {
                 EnsureTimerRuns();
-            }
         }
 
         private void EnsureTimerRuns()
         {
             if (_timer == null)
-            {
                 _timer = new Timer(OnTimer, null, (int) FlushDelay.TotalMilliseconds, 0);
-            }
         }
 
         private void OnTimer(object state)

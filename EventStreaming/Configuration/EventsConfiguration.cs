@@ -4,9 +4,6 @@ namespace EventStreaming.Configuration
 {
     public class EventsConfiguration
     {
-        public Dictionary<string, EventDefinition> AllEvents { get; }
-        public Dictionary<string, IFieldDefinition> AmbientFieldDefinitions { get; }
-
         public EventsConfiguration(
             Dictionary<string, EventDefinition> allEvents,
             Dictionary<string, IFieldDefinition> ambientFieldDefinitions)
@@ -14,5 +11,8 @@ namespace EventStreaming.Configuration
             AllEvents = allEvents;
             AmbientFieldDefinitions = ambientFieldDefinitions;
         }
+
+        public Dictionary<string, EventDefinition> AllEvents { get; }
+        public Dictionary<string, IFieldDefinition> AmbientFieldDefinitions { get; }
     }
 }

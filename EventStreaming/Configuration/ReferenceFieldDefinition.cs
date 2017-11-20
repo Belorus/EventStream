@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EventStreaming.Configuration
+﻿namespace EventStreaming.Configuration
 {
     public class ReferenceFieldDefinition : IFieldDefinition
     {
@@ -10,8 +8,9 @@ namespace EventStreaming.Configuration
             ReferencedField = referencedField;
         }
 
-        public string Name { get; }
         public IFieldDefinition ReferencedField { get; }
+
+        public string Name { get; }
 
         public override string ToString()
         {

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using EventStreaming.Abstractions;
 
-namespace EventStreaming.Dispatchers
+namespace EventStreaming.Senders
 {
     public class NullEventSender : IEventSender
     {

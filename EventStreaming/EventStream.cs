@@ -8,9 +8,9 @@ namespace EventStreaming
     public class EventStream : IEventStream
     {
         private readonly IAmbientContext _ambientContext;
+        private readonly EventsConfiguration _configuration;
         private readonly IEventDispatcher _dispatcher;
         private readonly EventStreamSettings _settings;
-        private readonly EventsConfiguration _configuration;
 
         public EventStream(
             IAmbientContext ambientContext,
@@ -24,6 +24,9 @@ namespace EventStreaming
             _configuration = configuration;
         }
 
+        /// <summary>
+        ///     Adds values from ambient context and passes event to dispatcher/sender
+        /// </summary>
         public void SendAsync(Event eventToSend)
         {
             if (IsEligibleForBeingSent(eventToSend))
@@ -45,7 +48,7 @@ namespace EventStreaming
             if (!_settings.IsSamplingEnabled)
                 return true;
 
-            int percent = _ambientContext.UserSeed % 100;
+            var percent = _ambientContext.UserSeed % 100;
 
             return percent < definition.Percent;
         }
@@ -74,10 +77,8 @@ namespace EventStreaming
 
             // Combine them with DYNAMIC values from event
             foreach (var field in eventToSend.Fields)
-            {
                 if (field.Value != null)
                     list.Add(field);
-            }
 
             return new Event(eventToSend.Name, list);
         }
