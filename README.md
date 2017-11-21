@@ -41,7 +41,8 @@ To start using the library you should:
                         {
                             "id": "LOGGED_IN",
                             "fields": {
-                                "event_type": "LOGGED_IN"
+                                "event_type": "LOGGED_IN",
+                                "login_type": "$string"
                             }
                         }
                     ]
@@ -74,4 +75,4 @@ context.SetSessionId("1234"); // This code can be added later
 context.SetTimestampFunc(() => DateTime.Now.Millisecond);
 ```
 
-5. And finally `eventStreaming.SendAsync(Events.LOGGED_IN());`
+5. And finally `eventStreaming.SendAsync(GeneratedEvents.LOGGED_IN("Facebook"));`
