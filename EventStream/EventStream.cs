@@ -58,7 +58,7 @@ namespace EventStream
         {
             var eventFields = _configuration.AllEvents[eventToSend.Name].Fields.Values;
 
-            var list = new List<KeyValuePair<string, object>>(eventFields.Count);
+            var list = new List<KeyValuePair<string, object>>(eventFields.Count + eventToSend.Fields.Count);
 
             foreach (var field in eventFields)
             {
