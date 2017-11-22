@@ -7,12 +7,12 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="EventStreaming" #>
-<#@ import namespace="EventStreaming.Configuration" #>
+<#@ import namespace="Configuration" #>
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using EventStreaming;
+using EventStream;
+using EventStream.Abstractions;
 
 namespace <#=_namespace#>
 {
@@ -52,6 +52,7 @@ namespace <#=_namespace#>
         {
             _dynamicValues.Remove("<#=field.Name#>");
         }
+
 <# } #>
 <# foreach(var field in _ambientFieldDefinitions.Values.OfType<EvaluatedFieldDefinition>()) { #>
         public void Set<#=field.Name.ToPascalCase()#>Func(Func<<#=field.Type.ToString().ToLowerCamelCase()#>> <#=field.Name.ToLowerCamelCase()#>)
@@ -72,14 +73,16 @@ namespace <#=_namespace#>
 
 <# foreach(var @event in _events) { #>
         public static Event <#=@event.Name#>(<#=string.Join(", ", @event.Fields.Values.OfType<DynamicFieldDefinition>().Select(f => f.Type.ToString().ToLowerCamelCase() + " " + f.Name.ToLowerCamelCase()))#>)
-        { <# if (@event.Fields.Values.OfType<DynamicFieldDefinition>().Any()) { #> 
+        {<# if (@event.Fields.Values.OfType<DynamicFieldDefinition>().Any()) { #>
             return new Event("<#=@event.Name#>",
                 new []
                 { <# foreach(var field in @event.Fields.Values.OfType<DynamicFieldDefinition>()) {#>
                     new KeyValuePair<string, object>("<#=field.Name#>", <#=field.Name.ToLowerCamelCase()#>), <# } #>
                 }); <# } else { #> 
             return new Event("<#=@event.Name#>", EmptyArray);<# } #>
+
         } 
-        <# }#>
+
+<# }#>
     }
 }

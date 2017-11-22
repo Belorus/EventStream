@@ -5,7 +5,7 @@ using CommandLine;
 using CommandLine.Text;
 using EventStream.Configuration;
 
-namespace EventStream.Generator
+namespace EventStream.Codegen
 {
     internal class Program
     {

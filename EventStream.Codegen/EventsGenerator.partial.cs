@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using EventStream.Configuration;
 
-namespace EventStream.Generator
+namespace EventStream.Codegen
 {
     public partial class EventsGenerator
     {

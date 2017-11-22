@@ -1,19 +1,19 @@
 ﻿using CommandLine;
 
-namespace EventStream.Generator
+namespace EventStream.Codegen
 {
     public class Arguments
     {
-        [Option("i", Required = true)]
+        [Option('i', "inputConfig", Required = true)]
         public string InputConfig { get; set; }
 
-        [Option("o", Required = true)]
+        [Option('o', "outputClassFile", Required = true)]
         public string OutputClass { get; set; }
 
-        [Option("c", Required = true)]
+        [Option('c', "className", Required = true)]
         public string ClassName { get; set; }
 
-        [Option("n", Required = true)]
+        [Option('n', "namespace", Required = true)]
         public string Namespace { get; set; }
     }
 }

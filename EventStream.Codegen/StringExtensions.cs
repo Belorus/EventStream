@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace EventStream.Generator
+namespace EventStream.Codegen
 {
     public static class StringExtensions
     {

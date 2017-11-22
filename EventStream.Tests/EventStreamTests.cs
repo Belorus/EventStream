@@ -59,7 +59,7 @@ namespace EventStream.Tests
 
             dispatcherMock.Verify(x => x.Dispatch(It.Is<Event>(e =>
                 e.Fields.Count == 1 &&
-                e.Fields[0].Key == "A1ref" && e.Fields[0].Value == "V1"
+                e.Fields[0].Key == "A1ref" && e.Fields[0].Value.ToString() == "V1"
             )));
         }
     }

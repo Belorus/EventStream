@@ -1,12 +1,14 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
+using System;
+using EventStream;
 using EventStream.Abstractions;
 
 namespace EventStream.Console.Sample
 {
     public class AmbientContext : IAmbientContext
     {
-        private readonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>(9);
+        private readonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>(6);
         private readonly Dictionary<string, Func<object>> _evaluatedValues = new Dictionary<string, Func<object>>(1);
 
         public int UserSeed { get; set; }
@@ -14,12 +16,21 @@ namespace EventStream.Console.Sample
         public object GetValue(string key)
         {
             if (_dynamicValues.TryGetValue(key, out var value))
+            {
                 return value;
-            if (_evaluatedValues.TryGetValue(key, out var func))
-                return func();
-            return null;
+            }
+            else
+            {
+                if (_evaluatedValues.TryGetValue(key, out var func))
+                {
+                    return func();
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
-
 
         public void SetUserId(string userId)
         {
@@ -31,16 +42,6 @@ namespace EventStream.Console.Sample
             _dynamicValues.Remove("user_id");
         }
 
-        public void SetPlatformType(string platformType)
-        {
-            _dynamicValues["platform_type"] = platformType;
-        }
-
-        public void ClearPlatformType()
-        {
-            _dynamicValues.Remove("platform_type");
-        }
-
         public void SetSessionId(string sessionId)
         {
             _dynamicValues["session_id"] = sessionId;
@@ -49,16 +50,6 @@ namespace EventStream.Console.Sample
         public void ClearSessionId()
         {
             _dynamicValues.Remove("session_id");
-        }
-
-        public void SetUserSnId(string userSnId)
-        {
-            _dynamicValues["user_sn_id"] = userSnId;
-        }
-
-        public void ClearUserSnId()
-        {
-            _dynamicValues.Remove("user_sn_id");
         }
 
         public void SetLoginMode(string loginMode)
@@ -101,17 +92,6 @@ namespace EventStream.Console.Sample
             _dynamicValues.Remove("os_version");
         }
 
-        public void SetTransactionFunnel(string transactionFunnel)
-        {
-            _dynamicValues["transaction_funnel"] = transactionFunnel;
-        }
-
-        public void ClearTransactionFunnel()
-        {
-            _dynamicValues.Remove("transaction_funnel");
-        }
-
-
         public void SetTimestampFunc(Func<long> timestamp)
         {
             _evaluatedValues["timestamp"] = () => timestamp();
@@ -123,19 +103,14 @@ namespace EventStream.Console.Sample
         }
     }
 
-    public static class Events
+    public static partial class Events
     {
         private static readonly KeyValuePair<string, object>[] EmptyArray = new KeyValuePair<string, object>[0];
 
-
         public static Event LOGGED_IN()
-        {
+        { 
             return new Event("LOGGED_IN", EmptyArray);
-        }
+        } 
 
-        public static Event PURCHASE()
-        {
-            return new Event("PURCHASE", EmptyArray);
-        }
     }
 }
