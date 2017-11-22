@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>EventStream.Console.Sample</RootNamespace>
     <AssemblyName>EventStream.Console.Sample</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
@@ -58,7 +58,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EventStream\EventStream.csproj">
       <Project>{1860e462-3847-412e-a6b1-8c728ea28511}</Project>
-      <Name>EventStreaming</Name>
+      <Name>EventStream</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using EventStream.Configuration;
 using EventStream.Dispatchers;
@@ -15,7 +16,7 @@ namespace EventStream.Console.Sample
             var context = new AmbientContext();
             var eventStreaming = new EventStream(
                 context,
-                new BufferingEventDispatcher(new ConsoleEventSender()),
+                new BufferingEventDispatcher(new DelegateEventSender(e => System.Console.WriteLine($"{e.Name}: {e.Fields.Select(f => string.Format($"{f.Key}={f.Value}"))}"))),
                 new EventStreamSettings(),
                 config);
 
