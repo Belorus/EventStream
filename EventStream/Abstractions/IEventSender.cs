@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EventStream.Abstractions
+namespace EventStream
 {
     public interface IEventSender
     {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using EventStream.Abstractions;
 
 namespace EventStream.Dispatchers
 {

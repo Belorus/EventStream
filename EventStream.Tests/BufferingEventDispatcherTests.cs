@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EventStream.Abstractions;
 using EventStream.Dispatchers;
 using Moq;
 using Xunit;

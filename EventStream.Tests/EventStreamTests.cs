@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using EventStream.Abstractions;
 using EventStream.Configuration;
 using Moq;
 using Xunit;
