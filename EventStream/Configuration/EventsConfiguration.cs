@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace EventStream.Configuration
 {
@@ -12,7 +13,7 @@ namespace EventStream.Configuration
             AmbientFieldDefinitions = ambientFieldDefinitions;
         }
 
-        public Dictionary<string, EventDefinition> AllEvents { get; }
-        public Dictionary<string, IFieldDefinition> AmbientFieldDefinitions { get; }
+        public IReadOnlyDictionary<string, EventDefinition> AllEvents { get; }
+        public IReadOnlyDictionary<string, IFieldDefinition> AmbientFieldDefinitions { get; }
     }
 }

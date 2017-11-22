@@ -9,6 +9,7 @@ namespace EventStream.Dispatchers
     {
         private readonly Queue<Event> _queue = new Queue<Event>();
         private readonly IEventSender _sender;
+        private readonly object _syncRoot = new object();
         private Timer _timer;
 
         public BufferingEventDispatcher(IEventSender sender)
@@ -23,7 +24,7 @@ namespace EventStream.Dispatchers
         public void Dispatch(Event eventToSend)
         {
             bool isQueueFull;
-            lock (_queue)
+            lock (_syncRoot)
             {
                 _queue.Enqueue(eventToSend);
                 isQueueFull = _queue.Count > MaxQueueSize;
@@ -37,23 +38,23 @@ namespace EventStream.Dispatchers
 
         private void EnsureTimerRuns()
         {
-            if (_timer == null)
-                _timer = new Timer(OnTimer, null, (int) FlushDelay.TotalMilliseconds, 0);
-        }
-
-        private void OnTimer(object state)
-        {
-            _timer?.Dispose();
-            _timer = null;
-
-            Flush();
+            lock (_syncRoot)
+            {
+                if (_timer == null)
+                {
+                    _timer = new Timer(_ => Flush(), null, (int) FlushDelay.TotalMilliseconds, 0);
+                }
+            }
         }
 
         private void Flush()
         {
             Event[] array;
-            lock (_queue)
+            lock (_syncRoot)
             {
+                _timer?.Dispose();
+                _timer = null;
+                
                 array = _queue.ToArray();
                 _queue.Clear();
             }

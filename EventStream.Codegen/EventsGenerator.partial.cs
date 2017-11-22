@@ -5,7 +5,7 @@ namespace EventStream.Generator
 {
     public partial class EventsGenerator
     {
-        private readonly Dictionary<string, IFieldDefinition> _ambientFieldDefinitions;
+        private readonly IReadOnlyDictionary<string, IFieldDefinition> _ambientFieldDefinitions;
         private readonly string _className;
         private readonly EventDefinition[] _events;
         private readonly string _namespace;
@@ -14,7 +14,7 @@ namespace EventStream.Generator
             string className,
             string @namespace,
             EventDefinition[] events,
-            Dictionary<string, IFieldDefinition> ambientFieldDefinitions)
+            IReadOnlyDictionary<string, IFieldDefinition> ambientFieldDefinitions)
         {
             _className = className;
             _namespace = @namespace;

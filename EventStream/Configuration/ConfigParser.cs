@@ -25,8 +25,7 @@ namespace EventStream.Configuration
 
                 var ambientFieldDefinitions = ParseFields(fields, null);
 
-                var allEvents = ParseGroups(groups, ambientFieldDefinitions, new Dictionary<string, IFieldDefinition>(),
-                        100)
+                var allEvents = ParseGroups(groups, ambientFieldDefinitions, new Dictionary<string, IFieldDefinition>(), 100)
                     .ToDictionary(e => e.Name, e => e);
 
                 return new EventsConfiguration(allEvents, ambientFieldDefinitions);
@@ -114,7 +113,8 @@ namespace EventStream.Configuration
 
         private IEnumerable<EventDefinition> ParseEvents(JArray events,
             Dictionary<string, IFieldDefinition> ambientFieldDefinitions,
-            Dictionary<string, IFieldDefinition> inheritedFieldDefinitions, double? inheritedSampleRate)
+            Dictionary<string, IFieldDefinition> inheritedFieldDefinitions, 
+            double inheritedSampleRate)
         {
             foreach (var ev in events.Cast<JObject>())
             {
@@ -128,7 +128,7 @@ namespace EventStream.Configuration
                 var percentProperty = ev.Property("percent");
                 var percent = percentProperty != null
                     ? (double) percentProperty.Value
-                    : inheritedSampleRate ?? 0;
+                    : inheritedSampleRate;
 
                 var id = ev.Property("id").Value.ToString();
 
