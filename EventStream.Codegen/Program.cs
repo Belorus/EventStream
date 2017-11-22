@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using CommandLine;
 using CommandLine.Text;
-using EventStreaming.Configuration;
+using EventStream.Configuration;
 
 namespace EventStream.Generator
 {

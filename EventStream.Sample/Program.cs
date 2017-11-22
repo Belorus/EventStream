@@ -1,10 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using EventStreaming;
-using EventStreaming.Configuration;
-using EventStreaming.Dispatchers;
-using EventStreaming.Senders;
+using EventStream.Configuration;
+using EventStream.Dispatchers;
+using EventStream.Senders;
 
 namespace EventStream.Console.Sample
 {
@@ -14,7 +13,7 @@ namespace EventStream.Console.Sample
         {
             var config = new ConfigParser(File.OpenRead("config.json")).ReadFullConfig();
             var context = new AmbientContext();
-            var eventStreaming = new EventStreaming.EventStream(
+            var eventStreaming = new EventStream(
                 context,
                 new BufferingEventDispatcher(new ConsoleEventSender()),
                 new EventStreamSettings(),

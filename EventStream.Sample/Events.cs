@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using EventStreaming;
-using EventStreaming.Abstractions;
+using EventStream.Abstractions;
 
 namespace EventStream.Console.Sample
 {

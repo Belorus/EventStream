@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using EventStreaming.Configuration;
+using EventStream.Configuration;
 
 namespace EventStream.Generator
 {

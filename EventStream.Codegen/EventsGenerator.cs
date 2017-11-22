@@ -8,70 +8,57 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------
 
-using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using EventStreaming.Configuration;
-using Microsoft.VisualStudio.TextTemplating;
+using EventStream.Configuration;
 
 namespace EventStream.Generator
 {
+    using System;
+    using System.IO;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Collections;
+    using System.Collections.Generic;
+
     /// <summary>
-    ///     Class to produce the template output
+    /// Class to produce the template output
     /// </summary>
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt" [GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
+    
+    #line 1 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class EventsGenerator : EventsGeneratorBase
     {
+#line hidden
         /// <summary>
-        ///     The current host for the text templating engine
-        /// </summary>
-        public virtual ITextTemplatingEngineHost Host { get; set; }
-
-        /// <summary>
-        ///     Create the template output
+        /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
-            Write("\n");
-            Write("\n");
-            Write("\n");
-            Write("\n");
-            Write("\n");
-            Write("\n");
-            Write("\n");
-            Write("\n");
-            Write("\n");
-            Write("\n");
-            Write("\nusing System.Collections.Generic;\nusing System.Linq;\nusing System;\nusing EventSt" +
-                  "reaming;\n\nnamespace ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-            Write(ToStringHelper.ToStringWithCulture(_namespace));
-
-#line default
-#line hidden
-            Write("\n{\n    public class AmbientContext : IAmbientContext\n    {\n        private readon" +
-                  "ly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>(");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-            Write(ToStringHelper.ToStringWithCulture(_ambientFieldDefinitions.Values
-                .OfType<DynamicFieldDefinition>().Count()));
-
-#line default
-#line hidden
-            Write(");\n        private readonly Dictionary<string, Func<object>> _evaluatedValues = n" +
-                  "ew Dictionary<string, Func<object>>(");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-            Write(ToStringHelper.ToStringWithCulture(_ambientFieldDefinitions.Values
-                .OfType<EvaluatedFieldDefinition>().Count()));
-
-#line default
-#line hidden
-            Write(@");
+            this.Write("using System.Collections.Generic;\r\nusing System.Linq;\r\nusing System;\r\nusing Event" +
+                    "Streaming;\r\n\r\nnamespace ");
+            
+            #line 17 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_namespace));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n{\r\n    public class AmbientContext : IAmbientContext\r\n    {\r\n        private re" +
+                    "adonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object" +
+                    ">(");
+            
+            #line 21 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>().Count()));
+            
+            #line default
+            #line hidden
+            this.Write(");\r\n        private readonly Dictionary<string, Func<object>> _evaluatedValues = " +
+                    "new Dictionary<string, Func<object>>(");
+            
+            #line 22 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_ambientFieldDefinitions.Values.OfType<EvaluatedFieldDefinition>().Count()));
+            
+            #line default
+            #line hidden
+            this.Write(@");
 
         public int UserSeed { get; set; }
 
@@ -95,492 +82,521 @@ namespace EventStream.Generator
         }
 
 ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-            foreach (var field in _ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>())
+            
+            #line 45 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ foreach(var field in _ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>()) { 
+            
+            #line default
+            #line hidden
+            this.Write("        public void Set");
+            
+            #line 46 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            this.Write("(");
+            
+            #line 46 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Type.ToString().ToLowerCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(" ");
+            
+            #line 46 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n        {\r\n            _dynamicValues[\"");
+            
+            #line 48 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\"] = ");
+            
+            #line 48 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(";\r\n        }\r\n\r\n        public void Clear");
+            
+            #line 51 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            this.Write("()\r\n        {\r\n            _dynamicValues.Remove(\"");
+            
+            #line 53 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\");\r\n        }\r\n");
+            
+            #line 55 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ } 
+            
+            #line default
+            #line hidden
+            
+            #line 56 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ foreach(var field in _ambientFieldDefinitions.Values.OfType<EvaluatedFieldDefinition>()) { 
+            
+            #line default
+            #line hidden
+            this.Write("        public void Set");
+            
+            #line 57 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Func(Func<");
+            
+            #line 57 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Type.ToString().ToLowerCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("> ");
+            
+            #line 57 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n        {\r\n            _evaluatedValues[\"");
+            
+            #line 59 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\"] = () => ");
+            
+            #line 59 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("();\r\n        }\r\n\r\n        public void Clear");
+            
+            #line 62 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
+            
+            #line default
+            #line hidden
+            this.Write("Func()\r\n        {\r\n            _evaluatedValues.Remove(\"");
+            
+            #line 64 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\");\r\n        }\r\n");
+            
+            #line 66 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("    }\r\n\r\n    public static partial class ");
+            
+            #line 69 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(_className));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n    {\r\n        private static readonly KeyValuePair<string, object>[] EmptyArra" +
+                    "y = new KeyValuePair<string, object>[0];\r\n\r\n");
+            
+            #line 73 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ foreach(var @event in _events) { 
+            
+            #line default
+            #line hidden
+            this.Write("        public static Event ");
+            
+            #line 74 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(@event.Name));
+            
+            #line default
+            #line hidden
+            this.Write("(");
+            
+            #line 74 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", @event.Fields.Values.OfType<DynamicFieldDefinition>().Select(f => f.Type.ToString().ToLowerCamelCase() + " " + f.Name.ToLowerCamelCase()))));
+            
+            #line default
+            #line hidden
+            this.Write(")\r\n        { ");
+            
+            #line 75 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ if (@event.Fields.Values.OfType<DynamicFieldDefinition>().Any()) { 
+            
+            #line default
+            #line hidden
+            this.Write(" \r\n            return new Event(\"");
+            
+            #line 76 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(@event.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\",\r\n                new []\r\n                { ");
+            
+            #line 78 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ foreach(var field in @event.Fields.Values.OfType<DynamicFieldDefinition>()) {
+            
+            #line default
+            #line hidden
+            this.Write("                    new KeyValuePair<string, object>(\"");
+            
+            #line 79 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\", ");
+            
+            #line 79 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
+            
+            #line default
+            #line hidden
+            this.Write("), ");
+            
+            #line 79 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                }); ");
+            
+            #line 80 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write(" \r\n            return new Event(\"");
+            
+            #line 81 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(@event.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\", EmptyArray);");
+            
+            #line 81 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("        } \r\n        ");
+            
+            #line 83 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ }
+            
+            #line default
+            #line hidden
+            this.Write("    }\r\n}");
+            return this.GenerationEnvironment.ToString();
+        }
+        private global::Microsoft.VisualStudio.TextTemplating.ITextTemplatingEngineHost hostValue;
+        /// <summary>
+        /// The current host for the text templating engine
+        /// </summary>
+        public virtual global::Microsoft.VisualStudio.TextTemplating.ITextTemplatingEngineHost Host
+        {
+            get
             {
-#line default
-#line hidden
-                Write("\n        public void Set");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
-
-#line default
-#line hidden
-                Write("(");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Type.ToString().ToLowerCamelCase()));
-
-#line default
-#line hidden
-                Write(" ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
-
-#line default
-#line hidden
-                Write(")\n        {\n            _dynamicValues[\"");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name));
-
-#line default
-#line hidden
-                Write("\"] = ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
-
-#line default
-#line hidden
-                Write(";\n        }\n\n        public void Clear");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
-
-#line default
-#line hidden
-                Write("()\n        {\n            _dynamicValues.Remove(\"");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name));
-
-#line default
-#line hidden
-                Write("\"); \n        }\n");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+                return this.hostValue;
             }
-
-#line default
-#line hidden
-            Write("\n");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-            foreach (var field in _ambientFieldDefinitions.Values.OfType<EvaluatedFieldDefinition>())
+            set
             {
-#line default
-#line hidden
-                Write("\n        public void Set");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
-
-#line default
-#line hidden
-                Write("Func(Func<");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Type.ToString().ToLowerCamelCase()));
-
-#line default
-#line hidden
-                Write("> ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
-
-#line default
-#line hidden
-                Write(")\n        {\n            _evaluatedValues[\"");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name));
-
-#line default
-#line hidden
-                Write("\"] = () => ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
-
-#line default
-#line hidden
-                Write("();\n        }\n\n        public void Clear");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
-
-#line default
-#line hidden
-                Write("Func()\n        {\n            _evaluatedValues.Remove(\"");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(field.Name));
-
-#line default
-#line hidden
-                Write("\"); \n        }\n");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+                this.hostValue = value;
             }
-
-#line default
-#line hidden
-            Write("\n    }\n\n    public static partial class ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-            Write(ToStringHelper.ToStringWithCulture(_className));
-
-#line default
-#line hidden
-            Write("\n    {\n        private static readonly KeyValuePair<string, object>[] EmptyArray " +
-                  "= new KeyValuePair<string, object>[0];\n\n");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-            foreach (var @event in _events)
-            {
-#line default
-#line hidden
-                Write("\n        public static Event ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(@event.Name));
-
-#line default
-#line hidden
-                Write("(");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                Write(ToStringHelper.ToStringWithCulture(string.Join(", ",
-                    @event.Fields.Values.OfType<DynamicFieldDefinition>().Select(f =>
-                        f.Type.ToString().ToLowerCamelCase() + " " + f.Name.ToLowerCamelCase()))));
-
-#line default
-#line hidden
-                Write(")\n        { ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                if (@event.Fields.Values.OfType<DynamicFieldDefinition>().Any())
-                {
-#line default
-#line hidden
-                    Write(" \n            return new Event(\"");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                    Write(ToStringHelper.ToStringWithCulture(@event.Name));
-
-#line default
-#line hidden
-                    Write("\",\n                new []\n                { ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                    foreach (var field in @event.Fields.Values.OfType<DynamicFieldDefinition>())
-                    {
-#line default
-#line hidden
-                        Write("\n                    new KeyValuePair<string, object>(\"");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                        Write(ToStringHelper.ToStringWithCulture(field.Name));
-
-#line default
-#line hidden
-                        Write("\", ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                        Write(ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
-
-#line default
-#line hidden
-                        Write("), ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                    }
-
-#line default
-#line hidden
-                    Write("\n                }); ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                }
-                else
-                {
-#line default
-#line hidden
-                    Write(" \n            return new Event(\"");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                    Write(ToStringHelper.ToStringWithCulture(@event.Name));
-
-#line default
-#line hidden
-                    Write("\", EmptyArray); ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-                }
-
-#line default
-#line hidden
-                Write("\n        } \n        ");
-
-#line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
-            }
-
-#line default
-#line hidden
-            Write("\n    }\n}");
-            return GenerationEnvironment.ToString();
         }
     }
-
-#line default
-#line hidden
-
+    
+    #line default
+    #line hidden
     #region Base class
-
     /// <summary>
-    ///     Base class for this transformation
+    /// Base class for this transformation
     /// </summary>
-    [GeneratedCode("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public class EventsGeneratorBase
     {
         #region Fields
-
-        private StringBuilder generationEnvironmentField;
-        private CompilerErrorCollection errorsField;
-        private List<int> indentLengthsField;
+        private global::System.Text.StringBuilder generationEnvironmentField;
+        private global::System.CodeDom.Compiler.CompilerErrorCollection errorsField;
+        private global::System.Collections.Generic.List<int> indentLengthsField;
+        private string currentIndentField = "";
         private bool endsWithNewline;
-
+        private global::System.Collections.Generic.IDictionary<string, object> sessionField;
         #endregion
-
         #region Properties
-
         /// <summary>
-        ///     The string builder that generation-time code is using to assemble generated output
+        /// The string builder that generation-time code is using to assemble generated output
         /// </summary>
-        protected StringBuilder GenerationEnvironment
+        protected System.Text.StringBuilder GenerationEnvironment
         {
             get
             {
-                if (generationEnvironmentField == null)
-                    generationEnvironmentField = new StringBuilder();
-                return generationEnvironmentField;
+                if ((this.generationEnvironmentField == null))
+                {
+                    this.generationEnvironmentField = new global::System.Text.StringBuilder();
+                }
+                return this.generationEnvironmentField;
             }
-            set => generationEnvironmentField = value;
+            set
+            {
+                this.generationEnvironmentField = value;
+            }
         }
-
         /// <summary>
-        ///     The error collection for the generation process
+        /// The error collection for the generation process
         /// </summary>
-        public CompilerErrorCollection Errors
+        public System.CodeDom.Compiler.CompilerErrorCollection Errors
         {
             get
             {
-                if (errorsField == null)
-                    errorsField = new CompilerErrorCollection();
-                return errorsField;
+                if ((this.errorsField == null))
+                {
+                    this.errorsField = new global::System.CodeDom.Compiler.CompilerErrorCollection();
+                }
+                return this.errorsField;
             }
         }
-
         /// <summary>
-        ///     A list of the lengths of each indent that was added with PushIndent
+        /// A list of the lengths of each indent that was added with PushIndent
         /// </summary>
-        private List<int> indentLengths
+        private System.Collections.Generic.List<int> indentLengths
         {
             get
             {
-                if (indentLengthsField == null)
-                    indentLengthsField = new List<int>();
-                return indentLengthsField;
+                if ((this.indentLengthsField == null))
+                {
+                    this.indentLengthsField = new global::System.Collections.Generic.List<int>();
+                }
+                return this.indentLengthsField;
             }
         }
-
         /// <summary>
-        ///     Gets the current indent we use when adding lines to the output
+        /// Gets the current indent we use when adding lines to the output
         /// </summary>
-        public string CurrentIndent { get; private set; } = "";
-
+        public string CurrentIndent
+        {
+            get
+            {
+                return this.currentIndentField;
+            }
+        }
         /// <summary>
-        ///     Current transformation session
+        /// Current transformation session
         /// </summary>
-        public virtual IDictionary<string, object> Session { get; set; }
-
+        public virtual global::System.Collections.Generic.IDictionary<string, object> Session
+        {
+            get
+            {
+                return this.sessionField;
+            }
+            set
+            {
+                this.sessionField = value;
+            }
+        }
         #endregion
-
         #region Transform-time helpers
-
         /// <summary>
-        ///     Write text directly into the generated output
+        /// Write text directly into the generated output
         /// </summary>
         public void Write(string textToAppend)
         {
             if (string.IsNullOrEmpty(textToAppend))
+            {
                 return;
+            }
             // If we're starting off, or if the previous text ended with a newline,
             // we have to append the current indent first.
-            if (GenerationEnvironment.Length == 0
-                || endsWithNewline)
+            if (((this.GenerationEnvironment.Length == 0) 
+                        || this.endsWithNewline))
             {
-                GenerationEnvironment.Append(CurrentIndent);
-                endsWithNewline = false;
+                this.GenerationEnvironment.Append(this.currentIndentField);
+                this.endsWithNewline = false;
             }
             // Check if the current text ends with a newline
-            if (textToAppend.EndsWith(Environment.NewLine,
-                StringComparison.CurrentCulture))
-                endsWithNewline = true;
+            if (textToAppend.EndsWith(global::System.Environment.NewLine, global::System.StringComparison.CurrentCulture))
+            {
+                this.endsWithNewline = true;
+            }
             // This is an optimization. If the current indent is "", then we don't have to do any
             // of the more complex stuff further down.
-            if (CurrentIndent.Length == 0)
+            if ((this.currentIndentField.Length == 0))
             {
-                GenerationEnvironment.Append(textToAppend);
+                this.GenerationEnvironment.Append(textToAppend);
                 return;
             }
             // Everywhere there is a newline in the text, add an indent after it
-            textToAppend = textToAppend.Replace(Environment.NewLine,
-                Environment.NewLine + CurrentIndent);
+            textToAppend = textToAppend.Replace(global::System.Environment.NewLine, (global::System.Environment.NewLine + this.currentIndentField));
             // If the text ends with a newline, then we should strip off the indent added at the very end
             // because the appropriate indent will be added when the next time Write() is called
-            if (endsWithNewline)
-                GenerationEnvironment.Append(textToAppend, 0,
-                    textToAppend.Length - CurrentIndent.Length);
+            if (this.endsWithNewline)
+            {
+                this.GenerationEnvironment.Append(textToAppend, 0, (textToAppend.Length - this.currentIndentField.Length));
+            }
             else
-                GenerationEnvironment.Append(textToAppend);
+            {
+                this.GenerationEnvironment.Append(textToAppend);
+            }
         }
-
         /// <summary>
-        ///     Write text directly into the generated output
+        /// Write text directly into the generated output
         /// </summary>
         public void WriteLine(string textToAppend)
         {
-            Write(textToAppend);
-            GenerationEnvironment.AppendLine();
-            endsWithNewline = true;
+            this.Write(textToAppend);
+            this.GenerationEnvironment.AppendLine();
+            this.endsWithNewline = true;
         }
-
         /// <summary>
-        ///     Write formatted text directly into the generated output
+        /// Write formatted text directly into the generated output
         /// </summary>
         public void Write(string format, params object[] args)
         {
-            Write(string.Format(CultureInfo.CurrentCulture, format, args));
+            this.Write(string.Format(global::System.Globalization.CultureInfo.CurrentCulture, format, args));
         }
-
         /// <summary>
-        ///     Write formatted text directly into the generated output
+        /// Write formatted text directly into the generated output
         /// </summary>
         public void WriteLine(string format, params object[] args)
         {
-            WriteLine(string.Format(CultureInfo.CurrentCulture, format, args));
+            this.WriteLine(string.Format(global::System.Globalization.CultureInfo.CurrentCulture, format, args));
         }
-
         /// <summary>
-        ///     Raise an error
+        /// Raise an error
         /// </summary>
         public void Error(string message)
         {
-            var error = new CompilerError();
+            System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
             error.ErrorText = message;
-            Errors.Add(error);
+            this.Errors.Add(error);
         }
-
         /// <summary>
-        ///     Raise a warning
+        /// Raise a warning
         /// </summary>
         public void Warning(string message)
         {
-            var error = new CompilerError();
+            System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
             error.ErrorText = message;
             error.IsWarning = true;
-            Errors.Add(error);
+            this.Errors.Add(error);
         }
-
         /// <summary>
-        ///     Increase the indent
+        /// Increase the indent
         /// </summary>
         public void PushIndent(string indent)
         {
-            if (indent == null)
-                throw new ArgumentNullException("indent");
-            CurrentIndent = CurrentIndent + indent;
-            indentLengths.Add(indent.Length);
+            if ((indent == null))
+            {
+                throw new global::System.ArgumentNullException("indent");
+            }
+            this.currentIndentField = (this.currentIndentField + indent);
+            this.indentLengths.Add(indent.Length);
         }
-
         /// <summary>
-        ///     Remove the last indent that was added with PushIndent
+        /// Remove the last indent that was added with PushIndent
         /// </summary>
         public string PopIndent()
         {
-            var returnValue = "";
-            if (indentLengths.Count > 0)
+            string returnValue = "";
+            if ((this.indentLengths.Count > 0))
             {
-                var indentLength = indentLengths[indentLengths.Count - 1];
-                indentLengths.RemoveAt(indentLengths.Count - 1);
-                if (indentLength > 0)
+                int indentLength = this.indentLengths[(this.indentLengths.Count - 1)];
+                this.indentLengths.RemoveAt((this.indentLengths.Count - 1));
+                if ((indentLength > 0))
                 {
-                    returnValue = CurrentIndent.Substring(CurrentIndent.Length - indentLength);
-                    CurrentIndent =
-                        CurrentIndent.Remove(CurrentIndent.Length - indentLength);
+                    returnValue = this.currentIndentField.Substring((this.currentIndentField.Length - indentLength));
+                    this.currentIndentField = this.currentIndentField.Remove((this.currentIndentField.Length - indentLength));
                 }
             }
             return returnValue;
         }
-
         /// <summary>
-        ///     Remove any indentation
+        /// Remove any indentation
         /// </summary>
         public void ClearIndent()
         {
-            indentLengths.Clear();
-            CurrentIndent = "";
+            this.indentLengths.Clear();
+            this.currentIndentField = "";
         }
-
         #endregion
-
         #region ToString Helpers
-
         /// <summary>
-        ///     Utility class to produce culture-oriented representation of an object as a string.
+        /// Utility class to produce culture-oriented representation of an object as a string.
         /// </summary>
         public class ToStringInstanceHelper
         {
-            private IFormatProvider formatProviderField =
-                CultureInfo.InvariantCulture;
-
+            private System.IFormatProvider formatProviderField  = global::System.Globalization.CultureInfo.InvariantCulture;
             /// <summary>
-            ///     Gets or sets format provider to be used by ToStringWithCulture method.
+            /// Gets or sets format provider to be used by ToStringWithCulture method.
             /// </summary>
-            public IFormatProvider FormatProvider
+            public System.IFormatProvider FormatProvider
             {
-                get => formatProviderField;
+                get
+                {
+                    return this.formatProviderField ;
+                }
                 set
                 {
-                    if (value != null)
-                        formatProviderField = value;
+                    if ((value != null))
+                    {
+                        this.formatProviderField  = value;
+                    }
                 }
             }
-
             /// <summary>
-            ///     This is called from the compile/run appdomain to convert objects within an expression block to a string
+            /// This is called from the compile/run appdomain to convert objects within an expression block to a string
             /// </summary>
             public string ToStringWithCulture(object objectToConvert)
             {
-                if (objectToConvert == null)
-                    throw new ArgumentNullException("objectToConvert");
-                var t = objectToConvert.GetType();
-                var method = t.GetMethod("ToString", new[]
+                if ((objectToConvert == null))
                 {
-                    typeof(IFormatProvider)
-                });
-                if (method == null)
+                    throw new global::System.ArgumentNullException("objectToConvert");
+                }
+                System.Type t = objectToConvert.GetType();
+                System.Reflection.MethodInfo method = t.GetMethod("ToString", new System.Type[] {
+                            typeof(System.IFormatProvider)});
+                if ((method == null))
+                {
                     return objectToConvert.ToString();
-                return (string) method.Invoke(objectToConvert, new object[]
+                }
+                else
                 {
-                    formatProviderField
-                });
+                    return ((string)(method.Invoke(objectToConvert, new object[] {
+                                this.formatProviderField })));
+                }
             }
         }
-
+        private ToStringInstanceHelper toStringHelperField = new ToStringInstanceHelper();
         /// <summary>
-        ///     Helper to produce culture-oriented representation of an object as a string
+        /// Helper to produce culture-oriented representation of an object as a string
         /// </summary>
-        public ToStringInstanceHelper ToStringHelper { get; } = new ToStringInstanceHelper();
-
+        public ToStringInstanceHelper ToStringHelper
+        {
+            get
+            {
+                return this.toStringHelperField;
+            }
+        }
         #endregion
     }
-
     #endregion
 }

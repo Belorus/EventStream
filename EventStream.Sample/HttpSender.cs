@@ -4,8 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using EventStreaming;
-using EventStreaming.Abstractions;
+using EventStream.Abstractions;
 using Newtonsoft.Json;
 
 namespace EventStream.Console.Sample
