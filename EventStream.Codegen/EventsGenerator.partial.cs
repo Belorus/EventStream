@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
-using EventStreaming.Configuration;
+using EventStream.Configuration;
 
 namespace EventStream.Generator
 {
     public partial class EventsGenerator
     {
+        private readonly IReadOnlyDictionary<string, IFieldDefinition> _ambientFieldDefinitions;
         private readonly string _className;
-        private readonly string _namespace;
         private readonly EventDefinition[] _events;
-        private readonly Dictionary<string, IFieldDefinition> _ambientFieldDefinitions;
+        private readonly string _namespace;
 
         public EventsGenerator(
-            string className, 
-            string @namespace, 
-            EventDefinition[] events, 
-            Dictionary<string, IFieldDefinition> ambientFieldDefinitions)
+            string className,
+            string @namespace,
+            EventDefinition[] events,
+            IReadOnlyDictionary<string, IFieldDefinition> ambientFieldDefinitions)
         {
             _className = className;
             _namespace = @namespace;

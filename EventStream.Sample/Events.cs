@@ -1,9 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
 using System;
-using EventStreaming;
+using System.Collections.Generic;
+using EventStream.Abstractions;
 
-namespace BB
+namespace EventStream.Console.Sample
 {
     public class AmbientContext : IAmbientContext
     {
@@ -15,20 +14,10 @@ namespace BB
         public object GetValue(string key)
         {
             if (_dynamicValues.TryGetValue(key, out var value))
-            {
                 return value;
-            }
-            else
-            {
-                if (_evaluatedValues.TryGetValue(key, out var func))
-                {
-                    return func();
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            if (_evaluatedValues.TryGetValue(key, out var func))
+                return func();
+            return null;
         }
 
 
@@ -39,7 +28,7 @@ namespace BB
 
         public void ClearUserId()
         {
-            _dynamicValues.Remove("user_id"); 
+            _dynamicValues.Remove("user_id");
         }
 
         public void SetPlatformType(string platformType)
@@ -49,7 +38,7 @@ namespace BB
 
         public void ClearPlatformType()
         {
-            _dynamicValues.Remove("platform_type"); 
+            _dynamicValues.Remove("platform_type");
         }
 
         public void SetSessionId(string sessionId)
@@ -59,7 +48,7 @@ namespace BB
 
         public void ClearSessionId()
         {
-            _dynamicValues.Remove("session_id"); 
+            _dynamicValues.Remove("session_id");
         }
 
         public void SetUserSnId(string userSnId)
@@ -69,7 +58,7 @@ namespace BB
 
         public void ClearUserSnId()
         {
-            _dynamicValues.Remove("user_sn_id"); 
+            _dynamicValues.Remove("user_sn_id");
         }
 
         public void SetLoginMode(string loginMode)
@@ -79,7 +68,7 @@ namespace BB
 
         public void ClearLoginMode()
         {
-            _dynamicValues.Remove("login_mode"); 
+            _dynamicValues.Remove("login_mode");
         }
 
         public void SetAppVersion(string appVersion)
@@ -89,7 +78,7 @@ namespace BB
 
         public void ClearAppVersion()
         {
-            _dynamicValues.Remove("app_version"); 
+            _dynamicValues.Remove("app_version");
         }
 
         public void SetOsName(string osName)
@@ -99,7 +88,7 @@ namespace BB
 
         public void ClearOsName()
         {
-            _dynamicValues.Remove("os_name"); 
+            _dynamicValues.Remove("os_name");
         }
 
         public void SetOsVersion(string osVersion)
@@ -109,7 +98,7 @@ namespace BB
 
         public void ClearOsVersion()
         {
-            _dynamicValues.Remove("os_version"); 
+            _dynamicValues.Remove("os_version");
         }
 
         public void SetTransactionFunnel(string transactionFunnel)
@@ -119,7 +108,7 @@ namespace BB
 
         public void ClearTransactionFunnel()
         {
-            _dynamicValues.Remove("transaction_funnel"); 
+            _dynamicValues.Remove("transaction_funnel");
         }
 
 
@@ -130,25 +119,23 @@ namespace BB
 
         public void ClearTimestampFunc()
         {
-            _evaluatedValues.Remove("timestamp"); 
+            _evaluatedValues.Remove("timestamp");
         }
-
     }
 
-    public static partial class Events
+    public static class Events
     {
         private static readonly KeyValuePair<string, object>[] EmptyArray = new KeyValuePair<string, object>[0];
 
 
         public static Event LOGGED_IN()
-        {  
-            return new Event("LOGGED_IN", EmptyArray); 
-        } 
-        
+        {
+            return new Event("LOGGED_IN", EmptyArray);
+        }
+
         public static Event PURCHASE()
-        {  
-            return new Event("PURCHASE", EmptyArray); 
-        } 
-        
+        {
+            return new Event("PURCHASE", EmptyArray);
+        }
     }
 }

@@ -7,6 +7,9 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
+
+using EventStream.Configuration;
+
 namespace EventStream.Generator
 {
     using System;
@@ -15,14 +18,12 @@ namespace EventStream.Generator
     using System.Linq;
     using System.Collections;
     using System.Collections.Generic;
-    using EventStreaming;
-    using EventStreaming.Configuration;
-    
+
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+    #line 1 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class EventsGenerator : EventsGeneratorBase
     {
@@ -32,36 +33,27 @@ namespace EventStream.Generator
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\nusing System.Collections.Generic;\nusing System.Linq;\nusing System;\nusing EventSt" +
-                    "reaming;\n\nnamespace ");
+            this.Write("using System.Collections.Generic;\r\nusing System.Linq;\r\nusing System;\r\nusing Event" +
+                    "Streaming;\r\n\r\nnamespace ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 17 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_namespace));
             
             #line default
             #line hidden
-            this.Write("\n{\n    public class AmbientContext : IAmbientContext\n    {\n        private readon" +
-                    "ly Dictionary<string, object> _dynamicValues = new Dictionary<string, object>(");
+            this.Write("\r\n{\r\n    public class AmbientContext : IAmbientContext\r\n    {\r\n        private re" +
+                    "adonly Dictionary<string, object> _dynamicValues = new Dictionary<string, object" +
+                    ">(");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 21 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>().Count()));
             
             #line default
             #line hidden
-            this.Write(");\n        private readonly Dictionary<string, Func<object>> _evaluatedValues = n" +
-                    "ew Dictionary<string, Func<object>>(");
+            this.Write(");\r\n        private readonly Dictionary<string, Func<object>> _evaluatedValues = " +
+                    "new Dictionary<string, Func<object>>(");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 22 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_ambientFieldDefinitions.Values.OfType<EvaluatedFieldDefinition>().Count()));
             
             #line default
@@ -91,230 +83,229 @@ namespace EventStream.Generator
 
 ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 45 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  foreach(var field in _ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>()) { 
             
             #line default
             #line hidden
-            this.Write("\n        public void Set");
+            this.Write("        public void Set");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 46 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 46 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Type.ToString().ToLowerCamelCase()));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 46 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
             
             #line default
             #line hidden
-            this.Write(")\n        {\n            _dynamicValues[\"");
+            this.Write(")\r\n        {\r\n            _dynamicValues[\"");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 48 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write("\"] = ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 48 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
             
             #line default
             #line hidden
-            this.Write(";\n        }\n\n        public void Clear");
+            this.Write(";\r\n        }\r\n\r\n        public void Clear");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 51 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
             
             #line default
             #line hidden
-            this.Write("()\n        {\n            _dynamicValues.Remove(\"");
+            this.Write("()\r\n        {\r\n            _dynamicValues.Remove(\"");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 53 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
-            this.Write("\"); \n        }\n");
+            this.Write("\");\r\n        }\r\n");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 55 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 56 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  foreach(var field in _ambientFieldDefinitions.Values.OfType<EvaluatedFieldDefinition>()) { 
             
             #line default
             #line hidden
-            this.Write("\n        public void Set");
+            this.Write("        public void Set");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 57 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
             
             #line default
             #line hidden
             this.Write("Func(Func<");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 57 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Type.ToString().ToLowerCamelCase()));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 57 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
             
             #line default
             #line hidden
-            this.Write(")\n        {\n            _evaluatedValues[\"");
+            this.Write(")\r\n        {\r\n            _evaluatedValues[\"");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 59 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write("\"] = () => ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 59 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
             
             #line default
             #line hidden
-            this.Write("();\n        }\n\n        public void Clear");
+            this.Write("();\r\n        }\r\n\r\n        public void Clear");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 62 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToPascalCase()));
             
             #line default
             #line hidden
-            this.Write("Func()\n        {\n            _evaluatedValues.Remove(\"");
+            this.Write("Func()\r\n        {\r\n            _evaluatedValues.Remove(\"");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 64 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
-            this.Write("\"); \n        }\n");
+            this.Write("\");\r\n        }\r\n");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 66 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n    }\n\n    public static partial class ");
+            this.Write("    }\r\n\r\n    public static partial class ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 69 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(_className));
             
             #line default
             #line hidden
-            this.Write("\n    {\n        private static readonly KeyValuePair<string, object>[] EmptyArray " +
-                    "= new KeyValuePair<string, object>[0];\n\n");
+            this.Write("\r\n    {\r\n        private static readonly KeyValuePair<string, object>[] EmptyArra" +
+                    "y = new KeyValuePair<string, object>[0];\r\n\r\n");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 73 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  foreach(var @event in _events) { 
             
             #line default
             #line hidden
-            this.Write("\n        public static Event ");
+            this.Write("        public static Event ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 74 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@event.Name));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 74 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", @event.Fields.Values.OfType<DynamicFieldDefinition>().Select(f => f.Type.ToString().ToLowerCamelCase() + " " + f.Name.ToLowerCamelCase()))));
             
             #line default
             #line hidden
-            this.Write(")\n        { ");
+            this.Write(")\r\n        { ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 75 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  if (@event.Fields.Values.OfType<DynamicFieldDefinition>().Any()) { 
             
             #line default
             #line hidden
-            this.Write(" \n            return new Event(\"");
+            this.Write(" \r\n            return new Event(\"");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 76 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@event.Name));
             
             #line default
             #line hidden
-            this.Write("\",\n                new []\n                { ");
+            this.Write("\",\r\n                new []\r\n                { ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 78 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  foreach(var field in @event.Fields.Values.OfType<DynamicFieldDefinition>()) {
             
             #line default
             #line hidden
-            this.Write("\n                    new KeyValuePair<string, object>(\"");
+            this.Write("                    new KeyValuePair<string, object>(\"");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 79 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write("\", ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 79 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
             
             #line default
             #line hidden
             this.Write("), ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 79 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n                }); ");
+            this.Write("                }); ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 80 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write(" \n            return new Event(\"");
+            this.Write(" \r\n            return new Event(\"");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 81 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@event.Name));
             
             #line default
             #line hidden
-            this.Write("\", EmptyArray); ");
+            this.Write("\", EmptyArray);");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 81 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n        } \n        ");
+            this.Write("        } \r\n        ");
             
-            #line 1 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 83 "C:\STUFF\Projects\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  }
             
             #line default
             #line hidden
-            this.Write("\n    }\n}");
+            this.Write("    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
         private global::Microsoft.VisualStudio.TextTemplating.ITextTemplatingEngineHost hostValue;

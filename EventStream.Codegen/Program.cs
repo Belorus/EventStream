@@ -1,30 +1,36 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using EventStreaming.Configuration;
+using CommandLine;
+using CommandLine.Text;
+using EventStream.Configuration;
 
 namespace EventStream.Generator
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var options = new Arguments();
-            if (CommandLine.Parser.Default.ParseArguments(args, options))
+            if (Parser.Default.ParseArguments(args, options))
             {
                 using (var file = File.OpenRead(options.InputConfig))
                 {
                     var parser = new ConfigParser(file);
                     var config = parser.ReadFullConfig();
 
-                    var generator = new EventsGenerator(options.ClassName, options.Namespace, config.AllEvents.Values.ToArray(), config.AmbientFieldDefinitions);
+                    var generator = new EventsGenerator(
+                        options.ClassName,
+                        options.Namespace,
+                        config.AllEvents.Values.ToArray(),
+                        config.AmbientFieldDefinitions);
 
                     File.WriteAllText(options.OutputClass, generator.TransformText().Trim());
                 }
             }
             else
             {
-                var helpText = CommandLine.Text.HelpText.AutoBuild(options).ToString();
+                var helpText = HelpText.AutoBuild(options).ToString();
                 Console.WriteLine(helpText);
             }
         }

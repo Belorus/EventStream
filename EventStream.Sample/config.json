@@ -1,59 +1,46 @@
-// Data types: string, long, int, float, double, bool
-// # - values are passed by called
-// $ - evaluated via delegate
-// @ - field reference
-
 {
-  "ambient_context": {
-    // global
-    "user_id": "#string",
-    "platform_type": "#string",
-    "session_id": "#string",
-    "user_sn_id": "#string",
-    "login_mode": "#string",
-    "app_version": "#string",
-    "os_name": "#string",
-    "os_version": "#string",
-
-    "timestamp": "$long",
-
-    // optional    
-    "transaction_funnel": "#string"
-  },
-  "groups": [
-    {
-      "percent": 2,
-      "fields": {
-        "event_group": "BBNC_CLIENT_INSTRUMENTATION",
-
-        "user_id": "@user_id",
-        "platform_type": "@platform_type",
-        "session_id": "@session_id",
-        "user_sn_id": "@user_sn_id",
-        "login_mode": "@login_mode",
-        "app_version": "@app_version",
-        "os_name": "@os_name",
-        "os_version": "@os_version",
-      },
-      "groups": [
+    "__comment": [
+        "// Data types: string, long, int, float, double, bool",
+        "// # - values are passed by called",
+        "// $ - evaluated via delegate",
+        "// @ - field reference"
+    ],
+    "ambient_context": {
+        "user_id": "#string",
+        "session_id": "#string",
+        "login_mode": "#string",
+        "app_version": "#string",
+        "os_name": "#string",
+        "os_version": "#string",
+        "timestamp": "$long",
+    },
+    "groups": [
         {
-          "fields": {
-            "event_sub_group": "AUTH"
-          },
-          "events": [
-            {
-              "id": "LOGGED_IN",
-              "fields": { "event_type": "LOGGED_IN" }
+            "percent": 30,
+            "fields": {
+                "event_group": "CLIENT_INSTRUMENTATION",
+                "user_id": "@user_id",
+                "session_id": "@session_id",
+                "login_mode": "@login_mode",
+                "app_version": "@app_version",
+                "os_name": "@os_name",
+                "os_version": "@os_version"
             },
-            {
-              "id": "PURCHASE",
-              "fields": { 
-		  "event_type": "PURCHASE", 
-                  "purchase_funnel": "@transaction_funnel"},
-            }  
-          ]
+            "groups": [
+                {
+                    "fields": {
+                        "event_sub_group": "AUTH"
+                    },
+                    "events": [
+                        {
+                            "id": "LOGGED_IN",
+                            "fields": {
+                                "event_type": "LOGGED_IN"
+                            }
+                        }
+                    ]
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
