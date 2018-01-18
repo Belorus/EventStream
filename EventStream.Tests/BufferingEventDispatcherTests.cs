@@ -14,7 +14,7 @@ namespace EventStream.Tests
         public async Task Event_Is_Sent_When_FlushDelay_Expires()
         {
             var sender = new Mock<IEventSender>();
-            var eventToSend = new Event("TEST", new KeyValuePair<string, object>[0]);
+            var eventToSend = new Event("TEST", new Dictionary<string, object>());
 
             var sut = new BufferingEventDispatcher(sender.Object)
             {
@@ -35,7 +35,7 @@ namespace EventStream.Tests
         public void Event_Is_Sent_When_Q_Is_Full()
         {
             var sender = new Mock<IEventSender>();
-            var eventToSend = new Event("TEST", new KeyValuePair<string, object>[0]);
+            var eventToSend = new Event("TEST", new Dictionary<string, object>());
 
             var sut = new BufferingEventDispatcher(sender.Object)
             {

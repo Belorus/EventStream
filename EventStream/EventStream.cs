@@ -23,6 +23,10 @@ namespace EventStream
             _configuration = configuration;
         }
 
+        public IEventInterceptor BeforeEnrichInterceptor { get; set; }
+        
+        public IEventInterceptor BeforeDispatchInterceptor { get; set; }
+
         /// <summary>
         ///     Adds values from ambient context and passes event to dispatcher/sender
         /// </summary>
@@ -30,9 +34,11 @@ namespace EventStream
         {
             if (IsEligibleForBeingSent(eventToSend))
             {
-                var richEvent = CreateRichEvent(eventToSend);
-
-                _dispatcher.Dispatch(richEvent);
+                var eventCopy = BeforeEnrichInterceptor?.Process(eventToSend) ?? eventToSend;
+                eventCopy  = CreateRichEvent(eventCopy);
+                eventCopy  = BeforeDispatchInterceptor?.Process(eventCopy ) ?? eventCopy ;
+                
+                _dispatcher.Dispatch(eventCopy );
             }
         }
 
@@ -57,7 +63,7 @@ namespace EventStream
         {
             var eventFields = _configuration.AllEvents[eventToSend.Name].Fields.Values;
 
-            var list = new List<KeyValuePair<string, object>>(eventFields.Count + eventToSend.Fields.Count);
+            var list = new Dictionary<string, object>(eventFields.Count + eventToSend.Fields.Count);
 
             foreach (var field in eventFields)
             {
@@ -66,18 +72,18 @@ namespace EventStream
                 {
                     var value = _ambientContext.GetValue(referenceField.ReferencedField.Name);
                     if (value != null)
-                        list.Add(new KeyValuePair<string, object>(referenceField.Name, value));
+                        list.Add(referenceField.Name, value);
                 }
 
                 // Add STATIC fields from configuration
                 if (field is StaticFieldDefinition staticField && staticField.Value != null)
-                    list.Add(new KeyValuePair<string, object>(staticField.Name, staticField.Value));
+                    list.Add(staticField.Name, staticField.Value);
             }
 
             // Combine them with DYNAMIC values from event
             foreach (var field in eventToSend.Fields)
                 if (field.Value != null)
-                    list.Add(field);
+                    list.Add(field.Key, field.Value);
 
             return new Event(eventToSend.Name, list);
         }
