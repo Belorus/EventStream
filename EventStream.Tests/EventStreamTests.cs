@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using EventStream.Configuration;
 using Moq;
 using Xunit;
@@ -58,7 +59,7 @@ namespace EventStream.Tests
 
             dispatcherMock.Verify(x => x.Dispatch(It.Is<Event>(e =>
                 e.Fields.Count == 1 &&
-                e.Fields[0].Key == "A1ref" && e.Fields[0].Value.ToString() == "V1"
+                e.Fields.First().Key == "A1ref" && e.Fields.First().Value.ToString() == "V1"
             )));
         }
     }

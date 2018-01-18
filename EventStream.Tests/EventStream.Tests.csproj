@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="BufferingEventDispatcherTests.cs" />
     <Compile Include="EventStreamTests.cs" />
+    <Compile Include="EventTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

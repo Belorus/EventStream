@@ -20,6 +20,8 @@ namespace EventStream.Console.Sample
                 new EventStreamSettings(),
                 config);
 
+            eventStreaming.BeforeDispatchInterceptor = new ReplaceGroupInDevBuildInterceptor();
+
             context.SetAppVersion("1.01");
             context.SetOsName("Windows");
             context.SetUserId("123");

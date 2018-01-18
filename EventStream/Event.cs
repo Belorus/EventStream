@@ -9,17 +9,32 @@ namespace EventStream
 
         public Event(
             string name,
-            IReadOnlyList<KeyValuePair<string, object>> fields)
+            IReadOnlyCollection<KeyValuePair<string, object>> fields)
         {
             Name = name;
             Fields = fields;
         }
 
-        public readonly IReadOnlyList<KeyValuePair<string, object>> Fields;
+        public readonly IReadOnlyCollection<KeyValuePair<string, object>> Fields;
 
         public Event With(IEnumerable<KeyValuePair<string, object>> fields)
         {
-            return new Event(Name, Fields.Union(fields).ToArray());
+            var newDictionary = Fields.ToDictionary(kv => kv.Key, kv => kv.Value);
+            foreach (var kv in fields)
+            {
+                newDictionary[kv.Key] = kv.Value;
+            }
+
+            return new Event(Name, newDictionary);
         }
+        
+        public Event With(string key, object value)
+        {
+            var newDictionary = Fields.ToDictionary(kv => kv.Key, kv => kv.Value);
+            newDictionary[key] = value;
+            
+            return new Event(Name, newDictionary);
+        }
+     
     }
 }
