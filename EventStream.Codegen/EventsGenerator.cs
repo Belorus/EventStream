@@ -212,14 +212,14 @@ namespace EventStream.Codegen
             #line default
             #line hidden
             this.Write("\r\n    {\r\n        private static readonly KeyValuePair<string, object>[] EmptyArra" +
-                    "y = new KeyValuePair<string, object>[0];\r\n\r\n");
+                    "y = new KeyValuePair<string, object>[0];\r\n");
             
-            #line 73 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 72 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  foreach(var @event in _events) { 
             
             #line default
             #line hidden
-            this.Write("        public static Event ");
+            this.Write("\r\n        public static Event ");
             
             #line 74 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@event.Name));
@@ -233,72 +233,81 @@ namespace EventStream.Codegen
             
             #line default
             #line hidden
-            this.Write(")\r\n        {");
+            this.Write(")\r\n        {\r\n");
             
-            #line 75 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
- if (@event.Fields.Values.OfType<DynamicFieldDefinition>().Any()) { 
+            #line 76 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+          if (@event.Fields.Values.OfType<DynamicFieldDefinition>().Any()) { 
             
             #line default
             #line hidden
             this.Write("            return new Event(\"");
             
-            #line 76 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 77 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@event.Name));
             
             #line default
             #line hidden
-            this.Write("\",\r\n                new []\r\n                { ");
+            this.Write("\",\r\n                new []\r\n                {\r\n");
             
-            #line 78 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
- foreach(var field in @event.Fields.Values.OfType<DynamicFieldDefinition>()) {
+            #line 80 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+          
+            foreach(var field in @event.Fields.Values.OfType<DynamicFieldDefinition>()) 
+            {
+
             
             #line default
             #line hidden
             this.Write("                    new KeyValuePair<string, object>(\"");
             
-            #line 79 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 84 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write("\", ");
             
-            #line 79 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 84 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name.ToLowerCamelCase()));
             
             #line default
             #line hidden
-            this.Write("), ");
+            this.Write("),\r\n");
             
-            #line 79 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("                }); ");
-            
-            #line 80 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
- } else { 
+            #line 85 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+
+            }
+
             
             #line default
             #line hidden
-            this.Write(" \r\n            return new Event(\"");
+            this.Write("                });\r\n");
             
-            #line 81 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 89 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+ 
+        } else {
+
+            
+            #line default
+            #line hidden
+            this.Write("            return new Event(\"");
+            
+            #line 92 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@event.Name));
             
             #line default
             #line hidden
-            this.Write("\", EmptyArray);");
+            this.Write("\", EmptyArray);\r\n");
             
-            #line 81 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
- } 
+            #line 93 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+
+        }
+
             
             #line default
             #line hidden
-            this.Write("\r\n        } \r\n\r\n");
+            this.Write("        }\r\n");
             
-            #line 85 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
+            #line 97 "C:\IrfanView\bingo.cs\Src\Playtika\EventStreaming\EventStream.Codegen\EventsGenerator.tt"
  }
             
             #line default
