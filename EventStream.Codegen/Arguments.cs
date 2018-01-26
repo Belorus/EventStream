@@ -2,7 +2,7 @@
 
 namespace EventStream.Codegen
 {
-    public class Arguments
+    internal class Arguments
     {
         [Option('i', "inputConfig", Required = true)]
         public string InputConfig { get; set; }

@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿
+using System.Collections.Generic;
 
 namespace EventStream.Senders
 {
     public class NullEventSender : IEventSender
     {
-        private readonly Task<bool> _completedTask = Task.FromResult(true);
-
-        public Task<bool> SendEvents(IReadOnlyList<Event> events)
+        public void SendEvents(IList<Event> events)
         {
-            return _completedTask;
         }
     }
 }
