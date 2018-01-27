@@ -23,7 +23,7 @@ namespace EventStream
             {
                 newDictionary[kv.Key] = kv.Value;
             }
-            
+
             foreach (var kv in fields)
             {
                 newDictionary[kv.Key] = kv.Value;
@@ -31,7 +31,7 @@ namespace EventStream
 
             return new Event(Name, newDictionary);
         }
-        
+
         public Event With(string key, object value)
         {
             var newDictionary = new Dictionary<string, object>(Fields.Count + 1);
@@ -39,10 +39,15 @@ namespace EventStream
             {
                 newDictionary[kv.Key] = kv.Value;
             }
+
             newDictionary[key] = value;
-            
+
             return new Event(Name, newDictionary);
         }
-     
+
+        public override string ToString()
+        {
+            return $"Event #{Name}";
+        }
     }
 }
