@@ -13,7 +13,7 @@ namespace EventStream.Configuration
             AmbientFieldDefinitions = ambientFieldDefinitions;
         }
 
-        public IReadOnlyDictionary<string, EventDefinition> AllEvents { get; }
-        public IReadOnlyDictionary<string, IFieldDefinition> AmbientFieldDefinitions { get; }
+        public IDictionary<string, EventDefinition> AllEvents { get; }
+        public IDictionary<string, IFieldDefinition> AmbientFieldDefinitions { get; }
     }
 }

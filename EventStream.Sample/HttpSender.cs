@@ -18,7 +18,7 @@ namespace EventStream.Console.Sample
             _url = url;
         }
 
-        public async Task<bool> SendEvents(IReadOnlyList<Event> events)
+        public async void SendEvents(IList<Event> events)
         {
             var jsonBytes = SerializeToJson(events);
 
@@ -29,15 +29,14 @@ namespace EventStream.Console.Sample
             try
             {
                 await new HttpClient().PostAsync(_url, content);
-                return true;
             }
             catch
             {
-                return false;
+                System.Console.WriteLine("Error while sending events");
             }
         }
 
-        private byte[] SerializeToJson(IReadOnlyList<Event> events)
+        private byte[] SerializeToJson(IEnumerable<Event> events)
         {
             var memoryStream = new MemoryStream();
 

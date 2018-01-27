@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D8C39588-9CB9-4A3C-9B68-27D53A64D405}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EventStream.Unity</RootNamespace>
+    <AssemblyName>EventStream.Unity</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net20\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\EventStream\Abstractions\IAmbientContext.cs" />
+    <Compile Include="..\EventStream\Abstractions\IEventDispatcher.cs" />
+    <Compile Include="..\EventStream\Abstractions\IEventSender.cs" />
+    <Compile Include="..\EventStream\Abstractions\IEventStream.cs" />
+    <Compile Include="..\EventStream\Configuration\ConfigParser.cs" />
+    <Compile Include="..\EventStream\Configuration\DynamicFieldDefinition.cs" />
+    <Compile Include="..\EventStream\Configuration\EvaluatedFieldDefinition.cs" />
+    <Compile Include="..\EventStream\Configuration\EventDefinition.cs" />
+    <Compile Include="..\EventStream\Configuration\EventsConfiguration.cs" />
+    <Compile Include="..\EventStream\Configuration\FieldType.cs" />
+    <Compile Include="..\EventStream\Configuration\IFieldDefinition.cs" />
+    <Compile Include="..\EventStream\Configuration\ReferenceFieldDefinition.cs" />
+    <Compile Include="..\EventStream\Configuration\StaticFieldDefinition.cs" />
+    <Compile Include="..\EventStream\Dispatchers\BufferingEventDispatcher.cs" />
+    <Compile Include="..\EventStream\Event.cs">
+      <Link>Event.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\EventStream.cs">
+      <Link>EventStream.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\EventStreamSettings.cs">
+      <Link>EventStreamSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\IEventInterceptor.cs">
+      <Link>IEventInterceptor.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\NullEventStream.cs">
+      <Link>NullEventStream.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Senders\DelegateEventSender.cs" />
+    <Compile Include="..\EventStream\Senders\NullEventSender.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+</Project>

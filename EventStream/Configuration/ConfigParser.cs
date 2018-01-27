@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Newtonsoft.Json.Linq;
 
 namespace EventStream.Configuration
@@ -25,8 +24,11 @@ namespace EventStream.Configuration
 
                 var ambientFieldDefinitions = ParseFields(fields, null);
 
-                var allEvents = ParseGroups(groups, ambientFieldDefinitions, new Dictionary<string, IFieldDefinition>(), 100)
-                    .ToDictionary(e => e.Name, e => e);
+                var allEvents = new Dictionary<string, EventDefinition>();
+                foreach (var g in ParseGroups(groups, ambientFieldDefinitions, new Dictionary<string, IFieldDefinition>(), 100))
+                {
+                    allEvents[g.Name] = g;
+                }
 
                 return new EventsConfiguration(allEvents, ambientFieldDefinitions);
             }
@@ -73,14 +75,17 @@ namespace EventStream.Configuration
             Dictionary<string, IFieldDefinition> ambientFieldDefinitions,
             Dictionary<string, IFieldDefinition> inheritedFieldDefinitions, double? inheritedSampleRate)
         {
-            foreach (var ev in groups.Cast<JObject>())
+            foreach (JObject ev in groups)
             {
                 var fieldsProperty = ev.Property("fields");
-                var fieldDefinitions = (fieldsProperty != null
+
+                var fieldDefinitions = fieldsProperty != null
                         ? ParseFields((JObject) fieldsProperty.Value, ambientFieldDefinitions)
-                        : new Dictionary<string, IFieldDefinition>())
-                    .Union(inheritedFieldDefinitions)
-                    .ToDictionary(kv => kv.Key, kv => kv.Value);
+                        : new Dictionary<string, IFieldDefinition>();
+                foreach (var kv in inheritedFieldDefinitions)
+                {
+                    fieldDefinitions[kv.Key] = kv.Value;
+                }
 
                 var percentProperty = ev.Property("percent");
                 var percent = percentProperty != null
@@ -116,14 +121,17 @@ namespace EventStream.Configuration
             Dictionary<string, IFieldDefinition> inheritedFieldDefinitions, 
             double inheritedSampleRate)
         {
-            foreach (var ev in events.Cast<JObject>())
+            foreach (JObject ev in events)
             {
                 var fieldsProperty = ev.Property("fields");
-                var fieldDefinitions = (fieldsProperty != null
+                var fieldDefinitions = fieldsProperty != null
                         ? ParseFields((JObject) fieldsProperty.Value, ambientFieldDefinitions)
-                        : new Dictionary<string, IFieldDefinition>())
-                    .Union(inheritedFieldDefinitions)
-                    .ToDictionary(kv => kv.Key, kv => kv.Value);
+                        : new Dictionary<string, IFieldDefinition>();
+                foreach (var kv in inheritedFieldDefinitions)
+                {
+                    fieldDefinitions[kv.Key] = kv.Value;
+                }
+
 
                 var percentProperty = ev.Property("percent");
                 var percent = percentProperty != null
