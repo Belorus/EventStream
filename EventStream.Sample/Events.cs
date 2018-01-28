@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using EventStream;
-using EventStream.Abstractions;
 
 namespace EventStream.Console.Sample
 {
@@ -108,9 +107,8 @@ namespace EventStream.Console.Sample
         private static readonly KeyValuePair<string, object>[] EmptyArray = new KeyValuePair<string, object>[0];
 
         public static Event LOGGED_IN()
-        { 
+        {
             return new Event("LOGGED_IN", EmptyArray);
-        } 
-
+        }
     }
 }

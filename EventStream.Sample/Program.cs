@@ -18,8 +18,11 @@ namespace EventStream.Console.Sample
                 context,
                 new BufferingEventDispatcher(new DelegateEventSender((events, callback) =>
                 {
-                    foreach(var e in events)
-                        System.Console.WriteLine($"{e.Name}: {e.Fields.Select(f => string.Format($"{f.Key}={f.Value}"))}");
+                    foreach (var e in events)
+                    {
+                        System.Console.WriteLine($"{e.Name}: {string.Join(",",e.Fields.Select(f => string.Format($"{f.Key}={f.Value}")))}");
+                    }
+                    callback(true);
                 })),
                 new EventStreamSettings(),
                 config);
@@ -32,9 +35,7 @@ namespace EventStream.Console.Sample
             context.SetSessionId("1234");
             context.SetTimestampFunc(() => DateTime.Now.Millisecond);
 
-            Thread.Sleep(4000);
-
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 eventStreaming.SendAsync(Events.LOGGED_IN());
             }

@@ -21,7 +21,7 @@ namespace EventStream.Tests
             var rnd = new Random();
             var sender = new DelegateEventSender((e, callback) =>
             {
-                if (rnd.Next(100) < 0) // 5% of events are sent successfuly
+                if (rnd.Next(100) < 5) // 5% of events are sent successfuly
                 {
                     eventsThatWereSent.AddRange(e);
                     callback(true);
