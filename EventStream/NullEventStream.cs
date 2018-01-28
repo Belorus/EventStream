@@ -1,4 +1,6 @@
 ﻿
+using EventStream.Abstractions;
+
 namespace EventStream
 {
     /// <summary>

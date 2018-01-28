@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using EventStream.Abstractions;
 using Newtonsoft.Json;
 
 namespace EventStream.Console.Sample
@@ -18,7 +20,7 @@ namespace EventStream.Console.Sample
             _url = url;
         }
 
-        public async void SendEvents(IList<Event> events)
+        public async void SendEvents(IList<Event> events, Action<bool> callback)
         {
             var jsonBytes = SerializeToJson(events);
 
@@ -29,10 +31,12 @@ namespace EventStream.Console.Sample
             try
             {
                 await new HttpClient().PostAsync(_url, content);
+                callback(true);
             }
             catch
             {
                 System.Console.WriteLine("Error while sending events");
+                callback(false);
             }
         }
 

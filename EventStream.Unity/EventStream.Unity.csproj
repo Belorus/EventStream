@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EventStream.Unity</RootNamespace>
     <AssemblyName>EventStream.Unity</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -41,20 +42,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\EventStream\Abstractions\IAmbientContext.cs" />
-    <Compile Include="..\EventStream\Abstractions\IEventDispatcher.cs" />
-    <Compile Include="..\EventStream\Abstractions\IEventSender.cs" />
-    <Compile Include="..\EventStream\Abstractions\IEventStream.cs" />
-    <Compile Include="..\EventStream\Configuration\ConfigParser.cs" />
-    <Compile Include="..\EventStream\Configuration\DynamicFieldDefinition.cs" />
-    <Compile Include="..\EventStream\Configuration\EvaluatedFieldDefinition.cs" />
-    <Compile Include="..\EventStream\Configuration\EventDefinition.cs" />
-    <Compile Include="..\EventStream\Configuration\EventsConfiguration.cs" />
-    <Compile Include="..\EventStream\Configuration\FieldType.cs" />
-    <Compile Include="..\EventStream\Configuration\IFieldDefinition.cs" />
-    <Compile Include="..\EventStream\Configuration\ReferenceFieldDefinition.cs" />
-    <Compile Include="..\EventStream\Configuration\StaticFieldDefinition.cs" />
-    <Compile Include="..\EventStream\Dispatchers\BufferingEventDispatcher.cs" />
+    <Compile Include="..\EventStream\Abstractions\IEventDispatcher.cs">
+      <Link>Abstractions\IEventDispatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Abstractions\IEventSender.cs">
+      <Link>Abstractions\IEventSender.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Configuration\ConfigParser.cs">
+      <Link>Configuration\ConfigParser.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Configuration\DynamicFieldDefinition.cs">
+      <Link>Configuration\DynamicFieldDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Configuration\EvaluatedFieldDefinition.cs">
+      <Link>Configuration\EvaluatedFieldDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Configuration\EventDefinition.cs">
+      <Link>Configuration\EventDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Configuration\EventsConfiguration.cs">
+      <Link>Configuration\EventsConfiguration.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Configuration\FieldType.cs">
+      <Link>Configuration\FieldType.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Configuration\IFieldDefinition.cs">
+      <Link>Configuration\IFieldDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Configuration\ReferenceFieldDefinition.cs">
+      <Link>Configuration\ReferenceFieldDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Configuration\StaticFieldDefinition.cs">
+      <Link>Configuration\StaticFieldDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Dispatchers\BufferingEventDispatcher.cs">
+      <Link>Dispatchers\BufferingEventDispatcher.cs</Link>
+    </Compile>
     <Compile Include="..\EventStream\Event.cs">
       <Link>Event.cs</Link>
     </Compile>
@@ -64,14 +87,36 @@
     <Compile Include="..\EventStream\EventStreamSettings.cs">
       <Link>EventStreamSettings.cs</Link>
     </Compile>
+    <Compile Include="..\EventStream\IAmbientContext.cs">
+      <Link>IAmbientContext.cs</Link>
+    </Compile>
     <Compile Include="..\EventStream\IEventInterceptor.cs">
       <Link>IEventInterceptor.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\IEventStream.cs">
+      <Link>IEventStream.cs</Link>
     </Compile>
     <Compile Include="..\EventStream\NullEventStream.cs">
       <Link>NullEventStream.cs</Link>
     </Compile>
-    <Compile Include="..\EventStream\Senders\DelegateEventSender.cs" />
-    <Compile Include="..\EventStream\Senders\NullEventSender.cs" />
+    <Compile Include="..\EventStream\Senders\DelegateEventSender.cs">
+      <Link>Senders\DelegateEventSender.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Senders\NullEventSender.cs">
+      <Link>Senders\NullEventSender.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Storage\FileSystemStorage.cs">
+      <Link>Storage\FileSystemStorage.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Storage\IEventStorage.cs">
+      <Link>Storage\IEventStorage.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Storage\InMemoryStorage.cs">
+      <Link>Storage\InMemoryStorage.cs</Link>
+    </Compile>
+    <Compile Include="..\EventStream\Storage\StoringEventSenderProxy.cs">
+      <Link>Storage\StoringEventSenderProxy.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,11 @@ namespace EventStream.Console.Sample
             var context = new AmbientContext();
             var eventStreaming = new EventStream(
                 context,
-                new BufferingEventDispatcher(new DelegateEventSender(e => System.Console.WriteLine($"{e.Name}: {e.Fields.Select(f => string.Format($"{f.Key}={f.Value}"))}"))),
+                new BufferingEventDispatcher(new DelegateEventSender((events, callback) =>
+                {
+                    foreach(var e in events)
+                        System.Console.WriteLine($"{e.Name}: {e.Fields.Select(f => string.Format($"{f.Key}={f.Value}"))}");
+                })),
                 new EventStreamSettings(),
                 config);
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using EventStream.Abstractions;
 
 namespace EventStream.Dispatchers
 {
@@ -26,7 +27,7 @@ namespace EventStream.Dispatchers
             lock (_syncRoot)
             {
                 _queue.Enqueue(eventToSend);
-                isQueueFull = _queue.Count > MaxQueueSize;
+                isQueueFull = _queue.Count >= MaxQueueSize;
             }
 
             if (isQueueFull)
@@ -57,7 +58,8 @@ namespace EventStream.Dispatchers
                 array = _queue.ToArray();
                 _queue.Clear();
             }
-            _sender.SendEvents(array);
+
+            _sender.SendEvents(array, isSuccess => { });
         }
     }
 }

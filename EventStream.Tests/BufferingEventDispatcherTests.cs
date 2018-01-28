@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EventStream.Abstractions;
 using EventStream.Dispatchers;
 using Moq;
 using Xunit;
@@ -24,11 +25,11 @@ namespace EventStream.Tests
 
             sut.Dispatch(eventToSend);
 
-            sender.Verify(x => x.SendEvents(It.Is<Event[]>(array => array.Contains(eventToSend))), Times.Never);
+            sender.Verify(x => x.SendEvents(It.Is<Event[]>(array => array.Contains(eventToSend)), It.IsAny<Action<bool>>()), Times.Never);
 
             await Task.Delay(sut.FlushDelay);
 
-            sender.Verify(x => x.SendEvents(It.Is<Event[]>(array => array.Contains(eventToSend))), Times.Once);
+            sender.Verify(x => x.SendEvents(It.Is<Event[]>(array => array.Contains(eventToSend)), It.IsAny<Action<bool>>()), Times.Once);
         }
 
         [Fact]
@@ -47,13 +48,12 @@ namespace EventStream.Tests
             sut.Dispatch(eventToSend);
             sut.Dispatch(eventToSend);
             sut.Dispatch(eventToSend);
+
+            sender.Verify(x => x.SendEvents(It.Is<Event[]>(array => array.Contains(eventToSend)), It.IsAny<Action<bool>>()), Times.Never);
+
             sut.Dispatch(eventToSend);
 
-            sender.Verify(x => x.SendEvents(It.Is<Event[]>(array => array.Contains(eventToSend))), Times.Never);
-
-            sut.Dispatch(eventToSend);
-
-            sender.Verify(x => x.SendEvents(It.Is<Event[]>(array => array.Contains(eventToSend))), Times.Once);
+            sender.Verify(x => x.SendEvents(It.Is<Event[]>(array => array.Contains(eventToSend)), It.IsAny<Action<bool>>()), Times.Once);
         }
     }
 }
