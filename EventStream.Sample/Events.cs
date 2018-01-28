@@ -107,9 +107,8 @@ namespace EventStream.Console.Sample
         private static readonly KeyValuePair<string, object>[] EmptyArray = new KeyValuePair<string, object>[0];
 
         public static Event LOGGED_IN()
-        { 
+        {
             return new Event("LOGGED_IN", EmptyArray);
-        } 
-
+        }
     }
 }
