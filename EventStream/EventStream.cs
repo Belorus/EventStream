@@ -83,8 +83,26 @@ namespace EventStream
 
             // Combine them with DYNAMIC values from event
             foreach (var field in eventToSend.Fields)
+            {
                 if (field.Value != null)
-                    list.Add(field.Key, field.Value);
+                {
+                    if (list.TryGetValue(field.Key, out object val))
+                    {
+                        if (!field.Value.Equals(val))
+                        {
+                            throw new InvalidOperationException($"Trying to replace '{field.Key}': '{val}' -> '{field.Value}'");
+                        }
+                        else
+                        {
+                            // Trying to put same same value under same key. Ignoring...
+                        }
+                    }
+                    else
+                    {
+                        list.Add(field.Key, field.Value);
+                    }
+                }
+            }
 
             return new Event(eventToSend.Name, list);
         }
