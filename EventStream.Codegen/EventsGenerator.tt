@@ -25,13 +25,15 @@ namespace <#=_namespace#>
 
         public object GetValue(string key)
         {
-            if (_dynamicValues.TryGetValue(key, out var value))
+            object value;
+            if (_dynamicValues.TryGetValue(key, out value))
             {
                 return value;
             }
             else
             {
-                if (_evaluatedValues.TryGetValue(key, out var func))
+                Func<object> func;
+                if (_evaluatedValues.TryGetValue(key, out func))
                 {
                     return func();
                 }

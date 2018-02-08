@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using EventStream.Configuration;
 using EventStream.Dispatchers;
 using EventStream.Senders;
