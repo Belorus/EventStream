@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !(NETSTANDARD1_1 || NETSTANDARD1_0)
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
@@ -43,3 +44,4 @@ namespace EventStream.Storage
         public bool HasData => Directory.GetFiles(_storageDirectoryPath).Length > 0;
     }
 }
+#endif

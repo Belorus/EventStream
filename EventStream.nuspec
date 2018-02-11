@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>EventStream</id>
+    <version>2.0</version>
+    <title>EventStream</title>
+    <authors>Grigory Perepechko</authors>
+    <owners>Playtika</owners>
+    <projectUrl>https://github.com/Belorus/EventStream</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>C# client library that helps implementing application instrumentation.</description>
+    <copyright>Copyright 2018</copyright>
+    <tags>C# .NET instrumentation log logging</tags>
+  </metadata>
+
+    <files>
+
+        <file src="EventStream\bin\Release\netstandard1.3\EventStream.dll" target="lib\netstandard1.3\EventStream.dll" />
+        <file src="EventStream\bin\Release\netstandard1.3\EventStream.xml" target="lib\netstandard1.3\EventStream.xml" />
+        <file src="EventStream\bin\Release\netstandard1.0\EventStream.dll" target="lib\netstandard1.0\EventStream.dll" />
+        <file src="EventStream\bin\Release\netstandard1.0\EventStream.xml" target="lib\netstandard1.0\EventStream.xml" />
+
+        <file src="EventStream.Codegen\bin\Release\EventStream.dll" target="tools\EventStream.dll" />
+        <file src="EventStream.Codegen\bin\Release\EventStream.Codegen.exe" target="tools\EventStream.Codegen.exe" />
+        <file src="EventStream.Codegen\bin\Release\Newtonsoft.Json.dll" target="tools\Newtonsoft.Json.dll" />
+        <file src="EventStream.Codegen\bin\Release\CommandLine.dll" target="tools\CommandLine.dll" />
+        <file src="EventStream.Codegen\bin\Release\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.dll" target="tools\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.dll " />
+
+    </files>
+</package>
