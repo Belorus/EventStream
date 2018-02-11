@@ -26,6 +26,8 @@ namespace EventStream.Codegen
                         config.AmbientFieldDefinitions);
 
                     File.WriteAllText(options.OutputClass, generator.TransformText().Trim());
+
+                    Console.WriteLine($"Saved config with {config.AllEvents.Count} events and {config.AmbientFieldDefinitions.Count} ambient fields to {Path.GetFullPath(options.OutputClass)}");
                 }
             }
             else
