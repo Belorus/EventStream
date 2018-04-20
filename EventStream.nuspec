@@ -17,8 +17,6 @@
 
         <file src="EventStream\bin\Release\netstandard1.3\EventStream.dll" target="lib\netstandard1.3\EventStream.dll" />
         <file src="EventStream\bin\Release\netstandard1.3\EventStream.xml" target="lib\netstandard1.3\EventStream.xml" />
-        <file src="EventStream\bin\Release\netstandard1.0\EventStream.dll" target="lib\netstandard1.0\EventStream.dll" />
-        <file src="EventStream\bin\Release\netstandard1.0\EventStream.xml" target="lib\netstandard1.0\EventStream.xml" />
 
         <file src="EventStream.Codegen\bin\Release\EventStream.dll" target="tools\EventStream.dll" />
         <file src="EventStream.Codegen\bin\Release\EventStream.Codegen.exe" target="tools\EventStream.Codegen.exe" />
