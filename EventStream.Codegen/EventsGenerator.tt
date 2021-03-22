@@ -45,7 +45,7 @@ namespace <#=_namespace#>
         }
 
 <# foreach(var field in _ambientFieldDefinitions.Values.OfType<DynamicFieldDefinition>()) { #>
-        public void Set<#=field.Name.ToPascalCase()#>(<#=field.Type.ToString().ToLowerCamelCase()#> <#=field.Name.ToLowerCamelCase()#>)
+        public void Set<#=field.Name.ToPascalCase()#>(<#=field.Type#> <#=field.Name.ToLowerCamelCase()#>)
         {
             _dynamicValues["<#=field.Name#>"] = <#=field.Name.ToLowerCamelCase()#>;
         }
@@ -57,7 +57,7 @@ namespace <#=_namespace#>
 
 <# } #>
 <# foreach(var field in _ambientFieldDefinitions.Values.OfType<EvaluatedFieldDefinition>()) { #>
-        public void Set<#=field.Name.ToPascalCase()#>Func(Func<<#=field.Type.ToString().ToLowerCamelCase()#>> <#=field.Name.ToLowerCamelCase()#>)
+        public void Set<#=field.Name.ToPascalCase()#>Func(Func<<#=field.Type#>> <#=field.Name.ToLowerCamelCase()#>)
         {
             _evaluatedValues["<#=field.Name#>"] = () => <#=field.Name.ToLowerCamelCase()#>();
         }
@@ -74,7 +74,7 @@ namespace <#=_namespace#>
         private static readonly KeyValuePair<string, object>[] EmptyArray = new KeyValuePair<string, object>[0];
 <# foreach(var @event in _events) { #>
 
-        public static Event <#=@event.Name#>(<#=string.Join(", ", @event.Fields.Values.OfType<DynamicFieldDefinition>().Select(f => f.Type.ToString().ToLowerCamelCase() + " " + f.Name.ToLowerCamelCase()))#>)
+        public static Event <#=@event.Name#>(<#=string.Join(", ", @event.Fields.Values.OfType<DynamicFieldDefinition>().Select(f => f.Type + " " + f.Name.ToLowerCamelCase()))#>)
         {
 <#          if (@event.Fields.Values.OfType<DynamicFieldDefinition>().Any()) { #>
             return new Event("<#=@event.Name#>",

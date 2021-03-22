@@ -48,13 +48,11 @@ namespace EventStream.Configuration
 
                 if (fieldValue.StartsWith("#", StringComparison.Ordinal))
                 {
-                    fieldDefinitions[fieldToken.Key] = new DynamicFieldDefinition(fieldToken.Key,
-                        (FieldType) Enum.Parse(typeof(FieldType), fieldValue.Substring(1), true));
+                    fieldDefinitions[fieldToken.Key] = new DynamicFieldDefinition(fieldToken.Key, fieldValue.Substring(1));
                 }
                 else if (fieldValue.StartsWith("$", StringComparison.Ordinal))
                 {
-                    fieldDefinitions[fieldToken.Key] = new EvaluatedFieldDefinition(fieldToken.Key,
-                        (FieldType) Enum.Parse(typeof(FieldType), fieldValue.Substring(1), true));
+                    fieldDefinitions[fieldToken.Key] = new EvaluatedFieldDefinition(fieldToken.Key, fieldValue.Substring(1));
                 }
                 else if (fieldValue.StartsWith("@", StringComparison.Ordinal))
                 {

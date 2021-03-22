@@ -36,7 +36,7 @@ namespace EventStream.Tests
         [Fact]
         public void Referenced_Fields_Are_Added()
         {
-            var ambientField = new DynamicFieldDefinition("A1", ConfigParser.FieldType.String);
+            var ambientField = new DynamicFieldDefinition("A1", "string");
             var config = new EventsConfiguration(
                 new Dictionary<string, EventDefinition>
                 {
