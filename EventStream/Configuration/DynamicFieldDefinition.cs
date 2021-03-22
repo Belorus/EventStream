@@ -2,13 +2,13 @@
 {
     public class DynamicFieldDefinition : IFieldDefinition
     {
-        public DynamicFieldDefinition(string name, ConfigParser.FieldType fieldType)
+        public DynamicFieldDefinition(string name, string fieldType)
         {
             Name = name;
             Type = fieldType;
         }
 
-        public ConfigParser.FieldType Type { get; }
+        public string Type { get; }
 
         public string Name { get; }
 
